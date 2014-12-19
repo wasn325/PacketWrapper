@@ -16,20 +16,20 @@ public class WrapperPlayClientChat extends AbstractPacket {
     }
     
     /**
-     * Retrieve the message sent by this player.
+     * Retrieve Message.
      * @return The current Message
-    */
+     */
     public String getMessage() {
         return handle.getStrings().read(0);
     }
     
     /**
-     * Set the message sent by this player.
+     * Set Message.
      * @param value - new value.
-    */
+     */
     public void setMessage(String value) {
         handle.getStrings().write(0, value);
     }
+    
 }
-
 

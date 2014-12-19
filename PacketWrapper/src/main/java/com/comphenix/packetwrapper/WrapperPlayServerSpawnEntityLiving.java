@@ -1,37 +1,10 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
 
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.injector.PacketConstructor;
-import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 
 public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.SPAWN_ENTITY_LIVING;
-    
-    private static PacketConstructor entityConstructor;
     
     public WrapperPlayServerSpawnEntityLiving() {
         super(new PacketContainer(TYPE), TYPE);
@@ -42,234 +15,213 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    public WrapperPlayServerSpawnEntityLiving(Entity entity) {
-        super(fromEntity(entity), TYPE);
-    }
-    
-    // Useful constructor
-    private static PacketContainer fromEntity(Entity entity) {
-        if (entityConstructor == null)
-        	entityConstructor = ProtocolLibrary.getProtocolManager().createPacketConstructor(TYPE, entity);
-        return entityConstructor.createPacket(entity);
-    }
-    
     /**
-     * Retrieve entity ID.
-     * @return The current EID
-    */
-    public int getEntityID() {
+     * Retrieve Entity ID.
+     * <p>
+     * Notes: entity's ID
+     * @return The current Entity ID
+     */
+    public int getEntityId() {
         return handle.getIntegers().read(0);
     }
     
     /**
-     * Retrieve the entity that will be spawned.
-     * @param world - the current world of the entity.
-     * @return The spawned entity.
-     */
-    public Entity getEntity(World world) {
-    	return handle.getEntityModifier(world).read(0);
-    }
-
-    /**
-     * Retrieve the entity that will be spawned.
-     * @param event - the packet event.
-     * @return The spawned entity.
-     */
-    public Entity getEntity(PacketEvent event) {
-    	return getEntity(event.getPlayer().getWorld());
-    }
-    
-    /**
-     * Set entity ID.
+     * Set Entity ID.
      * @param value - new value.
-    */
-    public void setEntityID(int value) {
+     */
+    public void setEntityId(int value) {
         handle.getIntegers().write(0, value);
     }
     
     /**
-     * Retrieve the type of mob.
+     * Retrieve Type.
+     * <p>
+     * Notes: the type of mob. See Mobs
      * @return The current Type
-    */
-    @SuppressWarnings("deprecation")
-	public EntityType getType() {
-        return EntityType.fromId(handle.getIntegers().read(1));
+     */
+    public byte getType() {
+        return (byte) handle.getIntegers().read(1);
     }
     
     /**
-     * Set the type of mob.
+     * Set Type.
      * @param value - new value.
-    */
-    @SuppressWarnings("deprecation")
-	public void setType(EntityType value) {
-        handle.getIntegers().write(1, (int) value.getTypeId());
+     */
+    public void setType(byte value) {
+        handle.getIntegers().write(1, (int) value);
     }
     
     /**
-     * Retrieve the x position of the object.
+     * Retrieve X.
      * <p>
-     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
+     * Notes: x position as a Fixed-Point number
      * @return The current X
-    */
-    public double getX() {
-        return handle.getIntegers().read(2) / 32.0D;
+     */
+    public int getX() {
+        return handle.getIntegers().read(2);
     }
     
     /**
-     * Set the x position of the object.
+     * Set X.
      * @param value - new value.
-    */
-    public void setX(double value) {
-        handle.getIntegers().write(2, (int) Math.floor(value * 32.0D));
+     */
+    public void setX(int value) {
+        handle.getIntegers().write(2, value);
     }
     
     /**
-     * Retrieve the y position of the object.
+     * Retrieve Y.
      * <p>
-     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
-     * @return The current y
-    */
-    public double getY() {
-        return handle.getIntegers().read(3) / 32.0D;
+     * Notes: y position as a Fixed-Point number
+     * @return The current Y
+     */
+    public int getY() {
+        return handle.getIntegers().read(3);
     }
     
     /**
-     * Set the y position of the object.
+     * Set Y.
      * @param value - new value.
-    */
-    public void setY(double value) {
-        handle.getIntegers().write(3, (int) Math.floor(value * 32.0D));
+     */
+    public void setY(int value) {
+        handle.getIntegers().write(3, value);
     }
     
     /**
-     * Retrieve the z position of the object.
+     * Retrieve Z.
      * <p>
-     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
-     * @return The current z
-    */
-    public double getZ() {
-        return handle.getIntegers().read(4) / 32.0D;
+     * Notes: z position as a Fixed-Point number
+     * @return The current Z
+     */
+    public int getZ() {
+        return handle.getIntegers().read(4);
     }
     
     /**
-     * Set the z position of the object.
+     * Set Z.
      * @param value - new value.
-    */
-    public void setZ(double value) {
-        handle.getIntegers().write(4, (int) Math.floor(value * 32.0D));
+     */
+    public void setZ(int value) {
+        handle.getIntegers().write(4, value);
     }
-   
+    
     /**
-     * Retrieve the yaw.
+     * Retrieve Yaw.
+     * <p>
+     * Notes: the yaw in steps of 2p/256
      * @return The current Yaw
-    */
-    public float getYaw() {
-        return (handle.getBytes().read(0) * 360.F) / 256.0F;
+     */
+    public byte getYaw() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the yaw of the spawned mob.
-     * @param value - new yaw.
-    */
-    public void setYaw(float value) {
-        handle.getBytes().write(0, (byte) (value * 256.0F / 360.0F));
-    }
-    
-    /**
-     * Retrieve the pitch.
-     * @return The current pitch
-    */
-    public float getHeadPitch() {
-        return (handle.getBytes().read(1) * 360.F) / 256.0F;
-    }
-    
-    /**
-     * Set the pitch of the spawned mob.
-     * @param value - new pitch.
-    */
-    public void setHeadPitch(float value) {
-        handle.getBytes().write(1, (byte) (value * 256.0F / 360.0F));
-    }
-    
-    /**
-     * Retrieve the yaw of the mob's head.
-     * @return The current yaw.
-    */
-    public float getHeadYaw() {
-        return (handle.getBytes().read(2) * 360.F) / 256.0F;
-    }
-    
-    /**
-     * Set the yaw of the mob's head.
-     * @param value - new yaw.
-    */
-    public void setHeadYaw(float value) {
-        handle.getBytes().write(2, (byte) (value * 256.0F / 360.0F));
-    }
-    
-    /**
-     * Retrieve the velocity in the x axis.
-     * @return The current velocity X
-    */
-    public double getVelocityX() {
-        return handle.getIntegers().read(5) / 8000.0D;
-    }
-    
-    /**
-     * Set the velocity in the x axis.
+     * Set Yaw.
      * @param value - new value.
-    */
-    public void setVelocityX(double value) {
-        handle.getIntegers().write(5, (int) (value * 8000.0D));
+     */
+    public void setYaw(byte value) {
+        handle.getBytes().write(0, value);
     }
     
     /**
-     * Retrieve the velocity in the y axis.
-     * @return The current velocity y
-    */
-    public double getVelocityY() {
-        return handle.getIntegers().read(6) / 8000.0D;
-    }
-    
-    /**
-     * Set the velocity in the y axis.
-     * @param value - new value.
-    */
-    public void setVelocityY(double value) {
-        handle.getIntegers().write(6, (int) (value * 8000.0D));
-    }
-    
-    /**
-     * Retrieve the velocity in the z axis.
-     * @return The current velocity z
-    */
-    public double getVelocityZ() {
-        return handle.getIntegers().read(7) / 8000.0D;
-    }
-    
-    /**
-     * Set the velocity in the z axis.
-     * @param value - new value.
-    */
-    public void setVelocityZ(double value) {
-        handle.getIntegers().write(7, (int) (value * 8000.0D));
-    }
-    
-    /**
-     * Retrieve the data watcher. 
+     * Retrieve Pitch.
      * <p>
-     * Content varies by mob, see Entities.
+     * Notes: the pitch in steps of 2p/256
+     * @return The current Pitch
+     */
+    public byte getPitch() {
+        return handle.getBytes().read(1);
+    }
+    
+    /**
+     * Set Pitch.
+     * @param value - new value.
+     */
+    public void setPitch(byte value) {
+        handle.getBytes().write(1, value);
+    }
+    
+    /**
+     * Retrieve Head Pitch.
+     * <p>
+     * Notes: the pitch in steps of 2p/256
+     * @return The current Head Pitch
+     */
+    public byte getHeadPitch() {
+        return handle.getBytes().read(2);
+    }
+    
+    /**
+     * Set Head Pitch.
+     * @param value - new value.
+     */
+    public void setHeadPitch(byte value) {
+        handle.getBytes().write(2, value);
+    }
+    
+    /**
+     * Retrieve Velocity X.
+     * @return The current Velocity X
+     */
+    public short getVelocityX() {
+        return (short) handle.getIntegers().read(5);
+    }
+    
+    /**
+     * Set Velocity X.
+     * @param value - new value.
+     */
+    public void setVelocityX(short value) {
+        handle.getIntegers().write(5, (int) value);
+    }
+    
+    /**
+     * Retrieve Velocity Y.
+     * @return The current Velocity Y
+     */
+    public short getVelocityY() {
+        return (short) handle.getIntegers().read(6);
+    }
+    
+    /**
+     * Set Velocity Y.
+     * @param value - new value.
+     */
+    public void setVelocityY(short value) {
+        handle.getIntegers().write(6, (int) value);
+    }
+    
+    /**
+     * Retrieve Velocity Z.
+     * @return The current Velocity Z
+     */
+    public short getVelocityZ() {
+        return (short) handle.getIntegers().read(7);
+    }
+    
+    /**
+     * Set Velocity Z.
+     * @param value - new value.
+     */
+    public void setVelocityZ(short value) {
+        handle.getIntegers().write(7, (int) value);
+    }
+    
+    /**
+     * Retrieve Metadata.
      * @return The current Metadata
-    */
+     */
     public WrappedDataWatcher getMetadata() {
         return handle.getDataWatcherModifier().read(0);
     }
     
     /**
-     * Set the data watcher.
+     * Set Metadata.
      * @param value - new value.
-    */
+     */
     public void setMetadata(WrappedDataWatcher value) {
         handle.getDataWatcherModifier().write(0, value);
     }
+    
 }
+

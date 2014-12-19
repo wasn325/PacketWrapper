@@ -16,66 +16,58 @@ public class WrapperPlayClientSteerVehicle extends AbstractPacket {
     }
     
     /**
-     * Retrieve positive to the left of the player.
+     * Retrieve Sideways.
+     * <p>
+     * Notes: positive to the left of the player
      * @return The current Sideways
-    */
+     */
     public float getSideways() {
         return handle.getFloat().read(0);
     }
     
     /**
-     * Set positive to the left of the player.
+     * Set Sideways.
      * @param value - new value.
-    */
+     */
     public void setSideways(float value) {
         handle.getFloat().write(0, value);
     }
     
     /**
-     * Retrieve positive forward.
+     * Retrieve Forward.
+     * <p>
+     * Notes: positive forward
      * @return The current Forward
-    */
+     */
     public float getForward() {
         return handle.getFloat().read(1);
     }
     
     /**
-     * Set positive forward.
+     * Set Forward.
      * @param value - new value.
-    */
+     */
     public void setForward(float value) {
         handle.getFloat().write(1, value);
     }
     
     /**
-     * Retrieve whether or not the mounted player is jumping.
-     * @return The current Jump
-    */
-    public boolean getJump() {
-        return handle.getSpecificModifier(boolean.class).read(0);
+     * Retrieve Flags.
+     * <p>
+     * Notes: 0x1 Jump, 0x2 Unmount
+     * @return The current Flags
+     */
+    public byte getFlags() {
+        return (byte) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
-     * Set whether or not the mounted player is jumping.
+     * Set Flags.
      * @param value - new value.
-    */
-    public void setJump(boolean value) {
+     */
+    public void setFlags(byte value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     
-    /**
-     * Retrieve true when leaving the vehicle.
-     * @return The current Unmount
-    */
-    public boolean getUnmount() {
-        return handle.getSpecificModifier(boolean.class).read(1);
-    }
-    
-    /**
-     * Set true when leaving the vehicle.
-     * @param value - new value.
-    */
-    public void setUnmount(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(1, value);
-    }
 }
+

@@ -1,14 +1,7 @@
 package com.comphenix.packetwrapper;
 
-import org.bukkit.World;
-import org.bukkit.WorldType;
-import org.bukkit.entity.Entity;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers.Difficulty;
-import com.comphenix.protocol.wrappers.EnumWrappers.NativeGameMode;
 
 public class WrapperPlayServerLogin extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.LOGIN;
@@ -23,140 +16,128 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     }
     
     /**
-     * Retrieve the player's Entity ID.
+     * Retrieve Entity ID.
+     * <p>
+     * Notes: the player's Entity ID
      * @return The current Entity ID
-    */
+     */
     public int getEntityId() {
         return handle.getIntegers().read(0);
     }
     
     /**
-     * Set the player's Entity ID.
+     * Set Entity ID.
      * @param value - new value.
-    */
+     */
     public void setEntityId(int value) {
         handle.getIntegers().write(0, value);
     }
     
     /**
-     * Retrieve the player's entity object.
-     * @param world - the word the player has joined.
-     * @return The player's entity.
-     */
-    public Entity getEntity(World world) {
-    	return handle.getEntityModifier(world).read(0);
-    }
-
-    /**
-     * Retrieve the player's entity object.
-     * @param event - the packet event.
-     * @return The player's entity.
-     */
-    public Entity getEntity(PacketEvent event) {
-    	return getEntity(event.getPlayer().getWorld());
-    }
-    
-    /**
-     * Retrieve the game mode of the initial world.
-     * @return The current gamemode.
-    */
-    public NativeGameMode getGamemode() {
-        return handle.getGameModes().read(0);
-    }
-    
-    /**
-     * Set the game mode of the initial world.
-     * @param value - new value.
-    */
-    public void setGamemode(NativeGameMode value) {
-        handle.getGameModes().write(0, value);
-    }
-    
-    /**
-     * Retrieve whether or not this is a hardcore world.
-     * @return TRUE if it is, FALSE otherwise.
-    */
-    public boolean isHardcore() {
-        return handle.getBooleans().read(0);
-    }
-    
-    /**
-     * Set whether or not this is a hardcore world.
-     * @param value - TRUE if it is, FALSE otherwise.
-    */
-    public void setHardcore(boolean value) {
-        handle.getBooleans().write(0, value);
-    }
-    
-    /**
-     * Retrieve -1: nether, 0: overworld, 1: end.
-     * @return The current Dimension
-    */
-    public int getDimension() {
-        return handle.getIntegers().read(1);
-    }
-    
-    /**
-     * Set -1: nether, 0: overworld, 1: end.
-     * @param value - new value.
-    */
-    public void setDimension(int value) {
-    	handle.getIntegers().write(1, value);
-    }
-    
-    /**
-     * Retrieve the difficulty of the initial world.
-     * @return The current difficulty
-    */
-    public Difficulty getDifficulty() {
-        return handle.getDifficulties().read(0);
-    }
-    
-    /**
-     * Set the difficulty of the initial world.
-     * @param value - new difficulty.
-    */
-    public void setDifficulty(Difficulty difficulty) {
-        handle.getDifficulties().write(0, difficulty);
-    }
-    
-    /**
-     * Retrieve the maximum number of players.
+     * Retrieve Gamemode.
      * <p>
-     * This is used by the client to draw the player list.
-     * @return The current max players.
-    */
-    public byte getMaxPlayers() {
-        return handle.getIntegers().read(2).byteValue();
+     * Notes: 0: survival, 1: creative, 2: adventure. Bit 3 (0x8) is the hardcore flag
+     * @return The current Gamemode
+     */
+    public byte getGamemode() {
+        return (byte) handle.getSpecificModifier(Enum.class).read(0);
     }
     
     /**
-     * Set used by the client to draw the player list.
+     * Set Gamemode.
      * @param value - new value.
-    */
+     */
+    public void setGamemode(byte value) {
+        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    }
+    
+    /**
+     * Retrieve Dimension.
+     * <p>
+     * Notes: -1: nether, 0: overworld, 1: end
+     * @return The current Dimension
+     */
+    public byte getDimension() {
+        return (byte) handle.getSpecificModifier(boolean.class).read(0);
+    }
+    
+    /**
+     * Set Dimension.
+     * @param value - new value.
+     */
+    public void setDimension(byte value) {
+        handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
+    }
+    
+    /**
+     * Retrieve Difficulty.
+     * <p>
+     * Notes: 0 thru 3 for Peaceful, Easy, Normal, Hard
+     * @return The current Difficulty
+     */
+    public byte getDifficulty() {
+        return (byte) handle.getIntegers().read(1);
+    }
+    
+    /**
+     * Set Difficulty.
+     * @param value - new value.
+     */
+    public void setDifficulty(byte value) {
+        handle.getIntegers().write(1, (int) value);
+    }
+    
+    /**
+     * Retrieve Max Players.
+     * <p>
+     * Notes: used by the client to draw the player list
+     * @return The current Max Players
+     */
+    public byte getMaxPlayers() {
+        return (byte) handle.getSpecificModifier(Enum.class).read(0);
+    }
+    
+    /**
+     * Set Max Players.
+     * @param value - new value.
+     */
     public void setMaxPlayers(byte value) {
+        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    }
+    
+    /**
+     * Retrieve Level Type.
+     * <p>
+     * Notes: default, flat, largeBiomes, amplified, default_1_1
+     * @return The current Level Type
+     */
+    public String getLevelType() {
+        return (String) handle.getIntegers().read(2);
+    }
+    
+    /**
+     * Set Level Type.
+     * @param value - new value.
+     */
+    public void setLevelType(String value) {
         handle.getIntegers().write(2, (int) value);
     }
     
     /**
-     * Retrieve the world type.
-     * <p>
-     * This is the level-type settign (default, flat, or largeBiomes) in server.properties.
-     * @return The current world type.
-    */
-    public WorldType getLevelType() {
-        return handle.getWorldTypeModifier().read(0);
+     * Retrieve Reduced Debug Info.
+     * @return The current Reduced Debug Info
+     */
+    public boolean getReducedDebugInfo() {
+        return (boolean) handle.getWorldTypeModifier().read(0);
     }
     
     /**
-     * Set the world type.
-     * <p>
-     * This is the level-type settign (default, flat, or largeBiomes) in server.properties.
+     * Set Reduced Debug Info.
      * @param value - new value.
-    */
-    public void setLevelType(WorldType type) {
-        handle.getWorldTypeModifier().write(0, type);
-    }    
+     */
+    public void setReducedDebugInfo(boolean value) {
+        handle.getWorldTypeModifier().write(0, (WorldType) value);
+    }
+    
 }
-
 

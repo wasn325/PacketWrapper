@@ -16,98 +16,117 @@ public class WrapperPlayServerPosition extends AbstractPacket {
     }
     
     /**
-     * Retrieve absolute position.
+     * Retrieve X.
+     * <p>
+     * Notes: absolute/Relative position
      * @return The current X
-    */
+     */
     public double getX() {
         return handle.getDoubles().read(0);
     }
     
     /**
-     * Set absolute position.
+     * Set X.
      * @param value - new value.
-    */
+     */
     public void setX(double value) {
         handle.getDoubles().write(0, value);
     }
     
     /**
-     * Retrieve absolute position.
+     * Retrieve Y.
+     * <p>
+     * Notes: absolute/Relative position
      * @return The current Y
-    */
+     */
     public double getY() {
         return handle.getDoubles().read(1);
     }
     
     /**
-     * Set absolute position.
+     * Set Y.
      * @param value - new value.
-    */
+     */
     public void setY(double value) {
         handle.getDoubles().write(1, value);
     }
     
     /**
-     * Retrieve absolute position.
+     * Retrieve Z.
+     * <p>
+     * Notes: absolute/Relative position
      * @return The current Z
-    */
+     */
     public double getZ() {
         return handle.getDoubles().read(2);
     }
     
     /**
-     * Set absolute position.
+     * Set Z.
      * @param value - new value.
-    */
+     */
     public void setZ(double value) {
         handle.getDoubles().write(2, value);
     }
     
     /**
-     * Retrieve absolute rotation on the X Axis, in degrees.
+     * Retrieve Yaw.
+     * <p>
+     * Notes: absolute/Relative rotation on the X Axis, in degrees
      * @return The current Yaw
-    */
+     */
     public float getYaw() {
         return handle.getFloat().read(0);
     }
     
     /**
-     * Set absolute rotation on the X Axis, in degrees.
+     * Set Yaw.
      * @param value - new value.
-    */
+     */
     public void setYaw(float value) {
         handle.getFloat().write(0, value);
     }
     
     /**
-     * Retrieve absolute rotation on the Y Axis, in degrees.
+     * Retrieve Pitch.
+     * <p>
+     * Notes: absolute/Relative rotation on the Y Axis, in degrees
      * @return The current Pitch
-    */
+     */
     public float getPitch() {
         return handle.getFloat().read(1);
     }
     
     /**
-     * Set absolute rotation on the Y Axis, in degrees.
+     * Set Pitch.
      * @param value - new value.
-    */
+     */
     public void setPitch(float value) {
         handle.getFloat().write(1, value);
     }
     
     /**
-     * Retrieve true if the client is on the ground, False otherwise.
-     * @return The current On Ground
-    */
-    public boolean getOnGround() {
-        return handle.getSpecificModifier(boolean.class).read(0);
+     * Retrieve Flags.
+     * <p>
+     * Notes: x 0x01 Y 0x02 Z 0x04 Y_ROT 0x08 X_ROT 0x10
+     * @return The current Flags
+     */
+    public byte getFlags() {
+        return (byte) handle.getSpecificModifier(Set.class).read(0);
     }
     
     /**
-     * Set true if the client is on the ground, False otherwise.
+     * Set Flags.
      * @param value - new value.
-    */
-    public void setOnGround(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, value);
+     */
+    public void setFlags(byte value) {
+        handle.getSpecificModifier(Set.class).write(0, (Set<?>) value);
     }
+    
+    // Cannot generate field X
+    // Cannot generate field Y
+    // Cannot generate field Z
+    // Cannot generate field Y_ROT
+    // Cannot generate field X_ROT
 }
+

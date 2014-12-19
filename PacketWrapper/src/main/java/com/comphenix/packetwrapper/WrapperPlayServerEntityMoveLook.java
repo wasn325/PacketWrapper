@@ -1,26 +1,9 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
-public class WrapperPlayServerEntityMoveLook extends WrapperPlayServerEntity {
+public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.ENTITY_MOVE_LOOK;
     
     public WrapperPlayServerEntityMoveLook() {
@@ -33,102 +16,128 @@ public class WrapperPlayServerEntityMoveLook extends WrapperPlayServerEntity {
     }
     
     /**
-     * Retrieve the relative movement in the x axis.
+     * Retrieve Entity ID.
      * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
-     * @return The current dX
-    */
-    public double getDx() {
-        return handle.getBytes().read(0) / 32.0D;
+     * Notes: entity's ID
+     * @return The current Entity ID
+     */
+    public int getEntityId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
-     * Set the relative movement in the x axis.
-     * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
+     * Set Entity ID.
      * @param value - new value.
-    */
-    public void setDx(double value) {
-    	if (Math.abs(value) > 4)
-    		throw new IllegalArgumentException("Displacement cannot exceed 4 meters.");
-        handle.getBytes().write(0, (byte) Math.min(Math.floor(value * 32.0D), 127));
+     */
+    public void setEntityId(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
-     * Retrieve the relative movement in the y axis.
+     * Retrieve DX.
      * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
-     * @return The current dY
-    */
-    public double getDy() {
-        return handle.getBytes().read(1) / 32.0D;
+     * Notes: change in X position as a Fixed-Point number
+     * @return The current DX
+     */
+    public byte getDx() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the relative movement in the y axis.
-     * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
+     * Set DX.
      * @param value - new value.
-    */
-    public void setDy(double value) {
-    	if (Math.abs(value) > 4)
-    		throw new IllegalArgumentException("Displacement cannot exceed 4 meters.");
-        handle.getBytes().write(1, (byte) Math.min(Math.floor(value * 32.0D), 127));
+     */
+    public void setDx(byte value) {
+        handle.getBytes().write(0, value);
     }
     
     /**
-     * Retrieve the relative movement in the z axis.
+     * Retrieve DY.
      * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
-     * @return The current dZ
-    */
-    public double getDz() {
-        return handle.getBytes().read(2) / 32.0D;
+     * Notes: change in Y position as a Fixed-Point number
+     * @return The current DY
+     */
+    public byte getDy() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the relative movement in the z axis.
-     * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
+     * Set DY.
      * @param value - new value.
-    */
-    public void setDz(double value) {
-    	if (Math.abs(value) > 4)
-    		throw new IllegalArgumentException("Displacement cannot exceed 4 meters.");
-        handle.getBytes().write(2, (byte) Math.min(Math.floor(value * 32.0D), 127));
+     */
+    public void setDy(byte value) {
+        handle.getBytes().write(0, value);
     }
     
     /**
-     * Retrieve the yaw of the current entity.
+     * Retrieve DZ.
+     * <p>
+     * Notes: change in Z position as a Fixed-Point number
+     * @return The current DZ
+     */
+    public byte getDz() {
+        return handle.getBytes().read(0);
+    }
+    
+    /**
+     * Set DZ.
+     * @param value - new value.
+     */
+    public void setDz(byte value) {
+        handle.getBytes().write(0, value);
+    }
+    
+    /**
+     * Retrieve Yaw.
+     * <p>
+     * Notes: the X Axis rotation as a fraction of 360
      * @return The current Yaw
-    */
-    public float getYaw() {
-        return (handle.getBytes().read(3) * 360.F) / 256.0F;
+     */
+    public byte getYaw() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the yaw of the current entity.
-     * @param value - new yaw.
-    */
-    public void setYaw(float value) {
-        handle.getBytes().write(3, (byte) (value * 256.0F / 360.0F));
+     * Set Yaw.
+     * @param value - new value.
+     */
+    public void setYaw(byte value) {
+        handle.getBytes().write(0, value);
     }
     
     /**
-     * Retrieve the pitch of the current entity.
-     * @return The current pitch
-    */
-    public float getPitch() {
-        return (handle.getBytes().read(4) * 360.F) / 256.0F;
+     * Retrieve Pitch.
+     * <p>
+     * Notes: the Y Axis rotation as a fraction of 360
+     * @return The current Pitch
+     */
+    public byte getPitch() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the pitch of the current entity.
-     * @param value - new pitch.
-    */
-    public void setPitch(float value) {
-        handle.getBytes().write(4, (byte) (value * 256.0F / 360.0F));
+     * Set Pitch.
+     * @param value - new value.
+     */
+    public void setPitch(byte value) {
+        handle.getBytes().write(0, value);
     }
+    
+    /**
+     * Retrieve On Ground.
+     * @return The current On Ground
+     */
+    public boolean getOnGround() {
+        return handle.getSpecificModifier(boolean.class).read(0);
+    }
+    
+    /**
+     * Set On Ground.
+     * @param value - new value.
+     */
+    public void setOnGround(boolean value) {
+        handle.getSpecificModifier(boolean.class).write(0, value);
+    }
+    
 }
-
 

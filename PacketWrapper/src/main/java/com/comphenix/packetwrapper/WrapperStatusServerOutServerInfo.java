@@ -2,7 +2,6 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.WrappedServerPing;
 
 public class WrapperStatusServerOutServerInfo extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Status.Server.OUT_SERVER_INFO;
@@ -17,20 +16,22 @@ public class WrapperStatusServerOutServerInfo extends AbstractPacket {
     }
     
     /**
-     * Retrieve the server information to display in the multiplayer menu.
-     * @return The current ping information.
-    */
-    public WrappedServerPing getServerPing() {
+     * Retrieve JSON Response.
+     * <p>
+     * Notes: https://gist.github.com/thinkofdeath/6927216
+     * @return The current JSON Response
+     */
+    public WrappedServerPing getJsonResponse() {
         return handle.getServerPings().read(0);
     }
     
     /**
-     * Set the server information to display in the multiplayer menu.
-     * @param value - new information.
-    */
-    public void setServerPing(WrappedServerPing value) {
+     * Set JSON Response.
+     * @param value - new value.
+     */
+    public void setJsonResponse(WrappedServerPing value) {
         handle.getServerPings().write(0, value);
     }
+    
 }
-
 

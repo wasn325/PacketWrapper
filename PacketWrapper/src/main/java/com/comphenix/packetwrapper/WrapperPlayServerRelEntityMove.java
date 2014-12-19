@@ -3,7 +3,7 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
-public class WrapperPlayServerRelEntityMove extends WrapperPlayServerEntity {
+public class WrapperPlayServerRelEntityMove extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.REL_ENTITY_MOVE;
     
     public WrapperPlayServerRelEntityMove() {
@@ -16,68 +16,92 @@ public class WrapperPlayServerRelEntityMove extends WrapperPlayServerEntity {
     }
     
     /**
-     * Retrieve the relative movement in the x axis.
+     * Retrieve Entity ID.
      * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
-     * @return The current dX
-    */
-    public double getDx() {
-        return handle.getBytes().read(0) / 32.0D;
+     * Notes: entity's ID
+     * @return The current Entity ID
+     */
+    public int getEntityId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
-     * Set the relative movement in the x axis.
-     * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
+     * Set Entity ID.
      * @param value - new value.
-    */
-    public void setDx(double value) {
-    	if (Math.abs(value) > 4)
-    		throw new IllegalArgumentException("Displacement cannot exceed 4 meters.");
-        handle.getBytes().write(0, (byte) Math.min(Math.floor(value * 32.0D), 127));
+     */
+    public void setEntityId(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
-     * Retrieve the relative movement in the y axis.
+     * Retrieve DX.
      * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
-     * @return The current dY
-    */
-    public double getDy() {
-        return handle.getBytes().read(1) / 32.0D;
+     * Notes: change in X position as a Fixed-Point number
+     * @return The current DX
+     */
+    public byte getDx() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the relative movement in the y axis.
-     * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
+     * Set DX.
      * @param value - new value.
-    */
-    public void setDy(double value) {
-    	if (Math.abs(value) > 4)
-    		throw new IllegalArgumentException("Displacement cannot exceed 4 meters.");
-        handle.getBytes().write(1, (byte) Math.min(Math.floor(value * 32.0D), 127));
+     */
+    public void setDx(byte value) {
+        handle.getBytes().write(0, value);
     }
     
     /**
-     * Retrieve the relative movement in the z axis.
+     * Retrieve DY.
      * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
-     * @return The current dZ
-    */
-    public double getDz() {
-        return handle.getBytes().read(2) / 32.0D;
+     * Notes: change in Y position as a Fixed-Point number
+     * @return The current DY
+     */
+    public byte getDy() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the relative movement in the z axis.
-     * <p>
-     * Note that this cannot exceed 4 blocks in either direction.
+     * Set DY.
      * @param value - new value.
-    */
-    public void setDz(double value) {
-    	if (Math.abs(value) > 4)
-    		throw new IllegalArgumentException("Displacement cannot exceed 4 meters.");
-        handle.getBytes().write(2, (byte) Math.min(Math.floor(value * 32.0D), 127));
+     */
+    public void setDy(byte value) {
+        handle.getBytes().write(0, value);
     }
+    
+    /**
+     * Retrieve DZ.
+     * <p>
+     * Notes: change in Z position as a Fixed-Point number
+     * @return The current DZ
+     */
+    public byte getDz() {
+        return handle.getBytes().read(0);
+    }
+    
+    /**
+     * Set DZ.
+     * @param value - new value.
+     */
+    public void setDz(byte value) {
+        handle.getBytes().write(0, value);
+    }
+    
+    /**
+     * Retrieve On Ground.
+     * @return The current On Ground
+     */
+    public boolean getOnGround() {
+        return handle.getSpecificModifier(boolean.class).read(0);
+    }
+    
+    /**
+     * Set On Ground.
+     * @param value - new value.
+     */
+    public void setOnGround(boolean value) {
+        handle.getSpecificModifier(boolean.class).write(0, value);
+    }
+    
 }
+

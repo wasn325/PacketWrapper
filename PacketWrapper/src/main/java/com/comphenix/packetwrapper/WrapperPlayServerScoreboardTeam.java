@@ -1,49 +1,10 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
-
-import java.util.Collection;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.reflect.IntEnum;
 
 public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.SCOREBOARD_TEAM;
-    
-    /**
-     * Enumeration of all the known packet modes.
-     * 
-     * @author Kristian
-     */
-    public static class Modes extends IntEnum {
-    	public static final int TEAM_CREATED = 0;
-    	public static final int TEAM_REMOVED = 1;
-    	public static final int TEAM_UPDATED = 2;
-    	public static final int PLAYERS_ADDED = 3;
-    	public static final int PLAYERS_REMOVED = 4;
-    	
-    	private static final Modes INSTANCE = new Modes();
-    	
-    	public static Modes getInstance() {
-    		return INSTANCE;
-    	}
-    }
     
     public WrapperPlayServerScoreboardTeam() {
         super(new PacketContainer(TYPE), TYPE);
@@ -55,149 +16,184 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
     }
     
     /**
-     * Retrieve an unique name for the team. (Shared with scoreboard)..
+     * Retrieve Team Name.
+     * <p>
+     * Notes: a unique name for the team. (Shared with scoreboard).
      * @return The current Team Name
-    */
+     */
     public String getTeamName() {
         return handle.getStrings().read(0);
     }
     
     /**
-     * Set an unique name for the team. (Shared with scoreboard)..
+     * Set Team Name.
      * @param value - new value.
-    */
+     */
     public void setTeamName(String value) {
         handle.getStrings().write(0, value);
     }
     
     /**
-     * Retrieve the current packet {@link Modes}.
+     * Retrieve Mode.
      * <p>
-     * This determines whether or not team information is added or removed.
-     * @return The current packet mode.
-    */
-    public byte getPacketMode() {
-        return handle.getIntegers().read(0).byteValue();
+     * Notes: if 0 then the team is created. If 1 then the team is removed. If 2 the team team information is updated. If 3 then new players are added to the team. If 4 then players are removed from the team.
+     * @return The current Mode
+     */
+    public byte getMode() {
+        return (byte) handle.getIntegers().read(1);
     }
     
     /**
-     * Set the current packet {@link Modes}.
-     * <p>
-     * This determines whether or not team information is added or removed.
+     * Set Mode.
      * @param value - new value.
-    */
-    public void setPacketMode(byte value) {
-        handle.getIntegers().write(0, (int) value);
+     */
+    public void setMode(byte value) {
+        handle.getIntegers().write(1, (int) value);
     }
     
     /**
-     * Retrieve the team display name.
+     * Retrieve Team Display Name.
      * <p>
-     * A team must be created or updated.
-     * @return The current display name.
-    */
+     * Notes: only if Mode = 0 or 2.
+     * @return The current Team Display Name
+     */
     public String getTeamDisplayName() {
+        return (String) handle.getIntegers().read(1);
+    }
+    
+    /**
+     * Set Team Display Name.
+     * @param value - new value.
+     */
+    public void setTeamDisplayName(String value) {
+        handle.getIntegers().write(1, (int) value);
+    }
+    
+    /**
+     * Retrieve Team Prefix.
+     * <p>
+     * Notes: only if Mode = 0 or 2. Displayed before the players' name that are part of this team.
+     * @return The current Team Prefix
+     */
+    public String getTeamPrefix() {
         return handle.getStrings().read(1);
     }
     
     /**
-     * Set the team display name.
-     * <p>
-     * A team must be created or updated.
+     * Set Team Prefix.
      * @param value - new value.
-    */
-    public void setTeamDisplayName(String value) {
-    	handle.getStrings().write(1, value);
+     */
+    public void setTeamPrefix(String value) {
+        handle.getStrings().write(1, value);
     }
     
     /**
-     * Retrieve the team prefix. This will be inserted before the name of each team member.
+     * Retrieve Team Suffix.
      * <p>
-     * A team must be created or updated.
-     * @return The current Team Prefix
-    */
-    public String getTeamPrefix() {
+     * Notes: only if Mode = 0 or 2. Displayed after the players' name that are part of this team.
+     * @return The current Team Suffix
+     */
+    public String getTeamSuffix() {
         return handle.getStrings().read(2);
     }
     
     /**
-     * Set the team prefix. This will be inserted before the name of each team member.
-     * <p>
-     * A team must be created or updated.
+     * Set Team Suffix.
      * @param value - new value.
-    */
-    public void setTeamPrefix(String value) {
+     */
+    public void setTeamSuffix(String value) {
         handle.getStrings().write(2, value);
     }
     
     /**
-     * Set the team suffix. This will be inserted after the name of each team member.
+     * Retrieve Friendly fire.
      * <p>
-     * A team must be created or updated.
-     * @return The current Team Suffix
-    */
-    public String getTeamSuffix() {
-        return handle.getStrings().read(3);
-    }
-    
-    /**
-     * Set only if Mode = 0 or 2. This will be after before the name of each team member.
-     * <p>
-     * A team must be created or updated.
-     * @param value - new value.
-    */
-    public void setTeamSuffix(String value) {
-        handle.getStrings().write(3, value);
-    }
-    
-    /**
-     * Retrieve whether or not friendly fire is enabled.
-     * <p>
-     * A team must be created or updated.
+     * Notes: only if Mode = 0 or 2; 0 for off, 1 for on, 3 for seeing friendly invisibles
      * @return The current Friendly fire
-    */
+     */
     public byte getFriendlyFire() {
-        return handle.getIntegers().read(1).byteValue();
+        return (byte) handle.getStrings().read(3);
     }
     
     /**
-     * Set whether or not friendly fire is enabled.
-     * <p>
-     * A team must be created or updated.
+     * Set Friendly fire.
      * @param value - new value.
-    */
+     */
     public void setFriendlyFire(byte value) {
-    	handle.getIntegers().write(1, (int) value);
+        handle.getStrings().write(3, (String) value);
     }
     
     /**
-     * Retrieve the list of player names.
+     * Retrieve Name Tag Visibility.
      * <p>
-     * Packet mode must be one of the following for this to be valid:
-     * <ul>
-     *  <li>{@link Modes#TEAM_CREATED}</li>
-     *  <li>{@link Modes#PLAYERS_ADDED}</li>
-     *  <li>{@link Modes#PLAYERS_REMOVED}</li>
-     * </ul>
-     * @return A list of player names.
-    */
-    @SuppressWarnings("unchecked")
-	public Collection<String> getPlayers() {
-        return handle.getSpecificModifier(Collection.class).read(0);
+     * Notes: only if Mode = 0 or 2. always, hideForOtherTeams, hideForOwnTeam, never.
+     * @return The current Name Tag Visibility
+     */
+    public String getNameTagVisibility() {
+        return (String) handle.getIntegers().read(2);
     }
     
     /**
-     * Set the list of player names.
-     * <p>
-     * Packet mode must be one of the following for this to be valid:
-     * <ul>
-     *  <li>{@link Modes#TEAM_CREATED}</li>
-     *  <li>{@link Modes#PLAYERS_ADDED}</li>
-     *  <li>{@link Modes#PLAYERS_REMOVED}</li>
-     * </ul>
+     * Set Name Tag Visibility.
      * @param value - new value.
-    */
-    public void setPlayers(Collection<String> players) {
-    	handle.getSpecificModifier(Collection.class).write(0, players);
+     */
+    public void setNameTagVisibility(String value) {
+        handle.getIntegers().write(2, (int) value);
     }
+    
+    /**
+     * Retrieve Color.
+     * <p>
+     * Notes: only if Mode = 0 or 2. Same as Chat colors.
+     * @return The current Color
+     */
+    public byte getColor() {
+        return (byte) handle.getStrings().read(4);
+    }
+    
+    /**
+     * Set Color.
+     * @param value - new value.
+     */
+    public void setColor(byte value) {
+        handle.getStrings().write(4, (String) value);
+    }
+    
+    /**
+     * Retrieve Player count.
+     * <p>
+     * Notes: only if Mode = 0 or 3 or 4. Number of players in the array
+     * @return The current Player count
+     */
+    public int getPlayerCount() {
+        return handle.getIntegers().read(0);
+    }
+    
+    /**
+     * Set Player count.
+     * @param value - new value.
+     */
+    public void setPlayerCount(int value) {
+        handle.getIntegers().write(0, value);
+    }
+    
+    /**
+     * Retrieve Players.
+     * <p>
+     * Notes: only if Mode = 0 or 3 or 4. Players to be added/remove from the team. Max 40 characters so may be uuid's later
+     * @return The current Players
+     */
+    public ofStrings[] getPlayers() {
+        return (ofStrings[]) handle.getIntegers().read(1);
+    }
+    
+    /**
+     * Set Players.
+     * @param value - new value.
+     */
+    public void setPlayers(ofStrings[] value) {
+        handle.getIntegers().write(1, (int) value);
+    }
+    
 }
+

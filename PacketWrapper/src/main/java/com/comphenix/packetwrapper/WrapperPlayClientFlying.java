@@ -1,20 +1,3 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
@@ -32,27 +15,23 @@ public class WrapperPlayClientFlying extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    protected WrapperPlayClientFlying(PacketContainer packet, PacketType type) {
-        super(packet, type);
-    }
-    
     /**
-     * Retrieve the ground state.
+     * Retrieve On Ground.
      * <p>
-     * True if the client is on the ground, false otherwise.
+     * Notes: true if the client is on the ground, False otherwise
      * @return The current On Ground
-    */
-    public boolean getOnGround() {
-        return handle.getSpecificModifier(boolean.class).read(0);
+     */
+    public bool getOnGround() {
+        return (bool) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
-     * Set the ground state.
-     * <p>
-     * True if the client is on the ground, false otherwise.
+     * Set On Ground.
      * @param value - new value.
-    */
-    public void setOnGround(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, value);
+     */
+    public void setOnGround(bool value) {
+        handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
+    
 }
+

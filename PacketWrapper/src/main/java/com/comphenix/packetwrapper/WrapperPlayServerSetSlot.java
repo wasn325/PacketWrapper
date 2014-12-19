@@ -1,23 +1,4 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
-
-import org.bukkit.inventory.ItemStack;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
@@ -35,58 +16,56 @@ public class WrapperPlayServerSetSlot extends AbstractPacket {
     }
     
     /**
-     * Retrieve the window which is being updated. 
+     * Retrieve Window ID.
      * <p>
-     * Use 0 for the player inventory. This packet will only be sent for the currently opened window while the player is 
-     * performing actions, even if it affects the player inventory. After the window is closed, a number of these packets
-     * are sent to update the player's inventory window.
-     * @return The current Window id
-    */
+     * Notes: the window which is being updated. 0 for player inventory. Note that all known window types include the player inventory. This packet will only be sent for the currently opened window while the player is performing actions, even if it affects the player inventory. After the window is closed, a number of these packets are sent to update the player's inventory window (0).
+     * @return The current Window ID
+     */
     public byte getWindowId() {
-        return handle.getIntegers().read(0).byteValue();
+        return (byte) handle.getIntegers().read(0);
     }
     
     /**
-     * Set the window which is being updated. 
-     * <p>
-     * Use 0 for the player inventory. This packet will only be sent for the currently opened window while the player is 
-     * performing actions, even if it affects the player inventory. After the window is closed, a number of these packets
-     * are sent to update the player's inventory window.
+     * Set Window ID.
      * @param value - new value.
-    */
+     */
     public void setWindowId(byte value) {
         handle.getIntegers().write(0, (int) value);
     }
     
     /**
-     * Retrieve the index of the slot that should be changed.
-     * @return The current slot
-    */
+     * Retrieve Slot.
+     * <p>
+     * Notes: the slot that should be updated
+     * @return The current Slot
+     */
     public short getSlot() {
-        return handle.getIntegers().read(1).shortValue();
+        return (short) handle.getIntegers().read(1);
     }
     
     /**
-     * Set the index of the slot that should be changed.
+     * Set Slot.
      * @param value - new value.
-    */
+     */
     public void setSlot(short value) {
         handle.getIntegers().write(1, (int) value);
     }
     
     /**
-     * Retrieve the new updated item stack.
+     * Retrieve Slot data.
      * @return The current Slot data
-    */
+     */
     public ItemStack getSlotData() {
         return handle.getItemModifier().read(0);
     }
     
     /**
-     * Set the new item stack.
+     * Set Slot data.
      * @param value - new value.
-    */
+     */
     public void setSlotData(ItemStack value) {
         handle.getItemModifier().write(0, value);
     }
+    
 }
+

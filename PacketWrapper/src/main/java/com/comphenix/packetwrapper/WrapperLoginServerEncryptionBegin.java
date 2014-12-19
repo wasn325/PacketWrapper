@@ -1,7 +1,5 @@
 package com.comphenix.packetwrapper;
 
-import java.security.PublicKey;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
@@ -18,52 +16,58 @@ public class WrapperLoginServerEncryptionBegin extends AbstractPacket {
     }
     
     /**
-     * Retrieve the server ID.
-     * @return The current Server id
-    */
+     * Retrieve Server ID.
+     * <p>
+     * Notes: appears to be empty as of 1.7.x
+     * @return The current Server ID
+     */
     public String getServerId() {
         return handle.getStrings().read(0);
     }
     
     /**
-     * Set the server ID.
+     * Set Server ID.
      * @param value - new value.
-    */
+     */
     public void setServerId(String value) {
         handle.getStrings().write(0, value);
     }
     
     /**
-     * Retrieve the public key instance.
-     * @return The current Public key length
-    */
-    public PublicKey getPublicKey() {
-        return handle.getSpecificModifier(PublicKey.class).read(0);
+     * Retrieve Length.
+     * <p>
+     * Notes: length of public key
+     * @return The current Length
+     */
+    public int getLength() {
+        return (int) handle.getSpecificModifier(PublicKey.class).read(0);
     }
     
     /**
-     * Set the public key instance.
+     * Set Length.
      * @param value - new value.
-    */
-    public void setPublicKey(PublicKey value) {
-        handle.getSpecificModifier(PublicKey.class).write(0, value);
+     */
+    public void setLength(int value) {
+        handle.getSpecificModifier(PublicKey.class).write(0, (PublicKey) value);
     }
     
     /**
-     * Retrieve the verify token.
-     * @return The current Public key
-    */
-    public byte[] getVerifyToken() {
+     * Retrieve Public Key.
+     * @return The current Public Key
+     */
+    public byte[] getPublicKey() {
         return handle.getByteArrays().read(0);
     }
     
     /**
-     * Set the verify token.
+     * Set Public Key.
      * @param value - new value.
-    */
-    public void getVerifyToken(byte[] value) {
+     */
+    public void setPublicKey(byte[] value) {
         handle.getByteArrays().write(0, value);
     }
+    
+    // Cannot generate field Length
+    // Cannot generate field Verify Token
 }
-
 

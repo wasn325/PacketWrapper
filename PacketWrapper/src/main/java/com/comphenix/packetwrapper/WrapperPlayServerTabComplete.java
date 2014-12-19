@@ -1,20 +1,3 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
@@ -28,20 +11,45 @@ public class WrapperPlayServerTabComplete extends AbstractPacket {
         handle.getModifier().writeDefaults();
     }
     
-    /**
-     * Retrieve the tab-completed text alternatives.
-     * @return The current Text
-    */
-    public String[] getText() {
-        return handle.getStringArrays().read(0);
+    public WrapperPlayServerTabComplete(PacketContainer packet) {
+        super(packet, TYPE);
     }
     
     /**
-     * Set the tab-completed text alternatives.
-     * @param value - new values.
-    */
-    public void setText(String[] value) {
-        handle.getStringArrays().write(0, value);
+     * Retrieve Count.
+     * <p>
+     * Notes: number of following strings
+     * @return The current Count
+     */
+    public int getCount() {
+        return (int) handle.getStringArrays().read(0);
     }
+    
+    /**
+     * Set Count.
+     * @param value - new value.
+     */
+    public void setCount(int value) {
+        handle.getStringArrays().write(0, (String[]) value);
+    }
+    
+    /**
+     * Retrieve Match.
+     * <p>
+     * Notes: one eligible command, note that each command is sent separately instead of in a single string, hence the need for Count
+     * @return The current Match
+     */
+    public String getMatch() {
+        return (String) handle.getStringArrays().read(0);
+    }
+    
+    /**
+     * Set Match.
+     * @param value - new value.
+     */
+    public void setMatch(String value) {
+        handle.getStringArrays().write(0, (String[]) value);
+    }
+    
 }
 

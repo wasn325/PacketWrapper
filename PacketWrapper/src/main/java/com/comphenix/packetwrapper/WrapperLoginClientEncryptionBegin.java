@@ -16,36 +16,40 @@ public class WrapperLoginClientEncryptionBegin extends AbstractPacket {
     }
     
     /**
-     * Retrieve the shared secret data.
-     * @return The shared data.
-    */
-    public byte[] getSharedSecret() {
-        return handle.getByteArrays().read(0);
+     * Retrieve Length.
+     * <p>
+     * Notes: length of shared secret
+     * @return The current Length
+     */
+    public int getLength() {
+        return (int) handle.getByteArrays().read(0);
     }
     
     /**
-     * Set the shared secret data.
+     * Set Length.
      * @param value - new value.
-    */
-    public void setSharedSecret(byte[] value) {
-        handle.getByteArrays().write(0, value);
+     */
+    public void setLength(int value) {
+        handle.getByteArrays().write(0, (byte[]) value);
     }
     
     /**
-     * Retrieve the token response.
-     * @return The shared data.
-    */
-    public byte[] getVerifyTokenResponse() {
+     * Retrieve Shared Secret.
+     * @return The current Shared Secret
+     */
+    public byte[] getSharedSecret() {
         return handle.getByteArrays().read(1);
     }
     
     /**
-     * Set token reponse.
+     * Set Shared Secret.
      * @param value - new value.
-    */
-    public void setVerifyTokenResponse(byte[] value) {
+     */
+    public void setSharedSecret(byte[] value) {
         handle.getByteArrays().write(1, value);
     }
+    
+    // Cannot generate field Length
+    // Cannot generate field Verify Token
 }
-
 

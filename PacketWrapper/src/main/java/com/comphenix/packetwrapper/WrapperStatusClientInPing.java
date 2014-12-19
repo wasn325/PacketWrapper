@@ -16,20 +16,20 @@ public class WrapperStatusClientInPing extends AbstractPacket {
     }
     
     /**
-     * Retrieve the random token we are sending.
-     * @return The current random token.
-    */
-    public long getToken() {
+     * Retrieve Time.
+     * @return The current Time
+     */
+    public long getTime() {
         return handle.getLongs().read(0);
     }
     
     /**
-     * Set the random token we are sending.
-     * @param value - new token.
-    */
-    public void setToken(long value) {
+     * Set Time.
+     * @param value - new value.
+     */
+    public void setTime(long value) {
         handle.getLongs().write(0, value);
-    }   
+    }
+    
 }
-
 

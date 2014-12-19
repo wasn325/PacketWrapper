@@ -1,27 +1,7 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
-
-import java.util.Map;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.WrappedStatistic;
 
 public class WrapperPlayServerStatistics extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.STATISTICS;
@@ -36,21 +16,41 @@ public class WrapperPlayServerStatistics extends AbstractPacket {
     }
     
     /**
-     * Retrieve a map of every statistic in this packet.
+     * Retrieve Count.
      * <p>
-     * Note that you must write back the map to save any changes.
-     * @return Map of every statistics sent to the player.
-    */
-    public Map<WrappedStatistic, Integer> getStatistics() {
-        return handle.getStatisticMaps().read(0);
+     * Notes: number of entries
+     * @return The current Count
+     */
+    public int getCount() {
+        return (int) handle.getSpecificModifier(Map.class).read(0);
     }
     
     /**
-     * Set every statistic and associated integer value to send to the player.
-     * @param changes - the changed map of statistics and data.
+     * Set Count.
+     * @param value - new value.
      */
-    public void setStatistics(Map<WrappedStatistic, Integer> changes) {
-        handle.getStatisticMaps().write(0, changes);
+    public void setCount(int value) {
+        handle.getSpecificModifier(Map.class).write(0, (Map<?,?>) value);
     }
+    
+    /**
+     * Retrieve Entry.
+     * <p>
+     * Notes: string
+     * @return The current Entry
+     */
+    public statistic'sname getEntry() {
+        return (statistic'sname) handle.getSpecificModifier(Map.class).read(0);
+    }
+    
+    /**
+     * Set Entry.
+     * @param value - new value.
+     */
+    public void setEntry(statistic'sname value) {
+        handle.getSpecificModifier(Map.class).write(0, (Map<?,?>) value);
+    }
+    
+    // Cannot generate field Value
 }
 

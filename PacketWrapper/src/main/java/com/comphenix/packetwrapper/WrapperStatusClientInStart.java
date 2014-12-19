@@ -15,7 +15,6 @@ public class WrapperStatusClientInStart extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    // There are no fields ...
+    // Cannot generate field 
 }
-
 

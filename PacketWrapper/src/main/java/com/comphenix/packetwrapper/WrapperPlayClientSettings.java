@@ -2,8 +2,6 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers.ChatVisibility;
-import com.comphenix.protocol.wrappers.EnumWrappers.Difficulty;
 
 public class WrapperPlayClientSettings extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Client.SETTINGS;
@@ -18,98 +16,94 @@ public class WrapperPlayClientSettings extends AbstractPacket {
     }
     
     /**
-     * Retrieve en_GB.
+     * Retrieve Locale.
+     * <p>
+     * Notes: en_GB
      * @return The current Locale
-    */
+     */
     public String getLocale() {
         return handle.getStrings().read(0);
     }
     
     /**
-     * Set en_GB.
+     * Set Locale.
      * @param value - new value.
-    */
+     */
     public void setLocale(String value) {
         handle.getStrings().write(0, value);
     }
     
     /**
-     * Retrieve 0-3 for 'far', 'normal', 'short', 'tiny'.
+     * Retrieve View distance.
+     * <p>
+     * Notes: client-side render distance(chunks)
      * @return The current View distance
-    */
+     */
     public byte getViewDistance() {
-        return handle.getIntegers().read(0).byteValue();
+        return (byte) handle.getIntegers().read(0);
     }
     
     /**
-     * Set 0-3 for 'far', 'normal', 'short', 'tiny'..
+     * Set View distance.
      * @param value - new value.
-    */
+     */
     public void setViewDistance(byte value) {
         handle.getIntegers().write(0, (int) value);
     }
     
     /**
-     * Retrieve chat settings.
-     * @return The current chat settings,
-    */
-    public ChatVisibility getChatVisibility() {
-        return handle.getChatVisibilities().read(0);
+     * Retrieve Chat flags.
+     * <p>
+     * Notes: chat settings. See notes below.
+     * @return The current Chat flags
+     */
+    public byte getChatFlags() {
+        return (byte) handle.getSpecificModifier(Enum.class).read(0);
     }
     
     /**
-     * Set chat settings.
+     * Set Chat flags.
      * @param value - new value.
-    */
-    public void setChatFlags(ChatVisibility value) {
-    	handle.getChatVisibilities().write(0, value);
+     */
+    public void setChatFlags(byte value) {
+        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
     }
     
     /**
-     * Retrieve whether or not the colours multiplayer setting is enabled.
+     * Retrieve Chat colours.
+     * <p>
+     * Notes: "Colours" multiplayer setting
      * @return The current Chat colours
-    */
-    public boolean getChatColours() {
-        return handle.getSpecificModifier(boolean.class).read(0);
+     */
+    public bool getChatColours() {
+        return (bool) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
-     * Set whether or not the colours multiplayer setting is enabled.
+     * Set Chat colours.
      * @param value - new value.
-    */
-    public void setChatColours(boolean value) {
+     */
+    public void setChatColours(bool value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     
     /**
-     * Retrieve the client-side difficulty.
-     * @return The current Difficulty
-    */
-    public Difficulty getDifficulty() {
-        return handle.getDifficulties().read(0);
+     * Retrieve Displayed skin parts.
+     * <p>
+     * Notes: skin parts. See note below
+     * @return The current Displayed skin parts
+     */
+    public byte getDisplayedSkinParts() {
+        return (byte) handle.getIntegers().read(1);
     }
     
     /**
-     * Set the client-side difficulty.
+     * Set Displayed skin parts.
      * @param value - new value.
-    */
-    public void setDifficulty(Difficulty difficulty) {
-    	handle.getDifficulties().write(0, difficulty);
+     */
+    public void setDisplayedSkinParts(byte value) {
+        handle.getIntegers().write(1, (int) value);
     }
     
-    /**
-     * Retrieve the client-side "show cape" option.
-     * @return The current Show Cape
-    */
-    public boolean getShowCape() {
-        return handle.getSpecificModifier(boolean.class).read(1);
-    }
-    
-    /**
-     * Set the client-side "show cape" option.
-     * @param value - new value.
-    */
-    public void setShowCape(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(1, (boolean) value);
-    }   
 }
+

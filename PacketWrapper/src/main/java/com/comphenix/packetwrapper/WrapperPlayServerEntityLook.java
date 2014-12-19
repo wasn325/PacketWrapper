@@ -1,26 +1,9 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
-public class WrapperPlayServerEntityLook extends WrapperPlayServerEntity {
+public class WrapperPlayServerEntityLook extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.ENTITY_LOOK;
     
     public WrapperPlayServerEntityLook() {
@@ -33,34 +16,74 @@ public class WrapperPlayServerEntityLook extends WrapperPlayServerEntity {
     }
     
     /**
-     * Retrieve the yaw of the current entity.
+     * Retrieve Entity ID.
+     * <p>
+     * Notes: entity's ID
+     * @return The current Entity ID
+     */
+    public int getEntityId() {
+        return handle.getIntegers().read(0);
+    }
+    
+    /**
+     * Set Entity ID.
+     * @param value - new value.
+     */
+    public void setEntityId(int value) {
+        handle.getIntegers().write(0, value);
+    }
+    
+    /**
+     * Retrieve Yaw.
+     * <p>
+     * Notes: the X Axis rotation as a fraction of 360
      * @return The current Yaw
-    */
-    public float getYaw() {
-        return (handle.getBytes().read(3) * 360.F) / 256.0F;
+     */
+    public byte getYaw() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the yaw of the current entity.
-     * @param value - new yaw.
-    */
-    public void setYaw(float value) {
-        handle.getBytes().write(3, (byte) (value * 256.0F / 360.0F));
+     * Set Yaw.
+     * @param value - new value.
+     */
+    public void setYaw(byte value) {
+        handle.getBytes().write(0, value);
     }
     
     /**
-     * Retrieve the pitch of the current entity.
-     * @return The current pitch
-    */
-    public float getPitch() {
-        return (handle.getBytes().read(4) * 360.F) / 256.0F;
+     * Retrieve Pitch.
+     * <p>
+     * Notes: the Y Axis rotation as a fraction of 360
+     * @return The current Pitch
+     */
+    public byte getPitch() {
+        return handle.getBytes().read(0);
     }
     
     /**
-     * Set the pitch of the current entity.
-     * @param value - new pitch.
-    */
-    public void setPitch(float value) {
-        handle.getBytes().write(4, (byte) (value * 256.0F / 360.0F));
+     * Set Pitch.
+     * @param value - new value.
+     */
+    public void setPitch(byte value) {
+        handle.getBytes().write(0, value);
     }
+    
+    /**
+     * Retrieve On Ground.
+     * @return The current On Ground
+     */
+    public boolean getOnGround() {
+        return handle.getSpecificModifier(boolean.class).read(0);
+    }
+    
+    /**
+     * Set On Ground.
+     * @param value - new value.
+     */
+    public void setOnGround(boolean value) {
+        handle.getSpecificModifier(boolean.class).write(0, value);
+    }
+    
 }
+

@@ -1,28 +1,7 @@
-/*
- *  PacketWrapper - Contains wrappers for each packet in Minecraft.
- *  Copyright (C) 2012 Kristian S. Stangeland
- *
- *  This program is free software; you can redistribute it and/or modify it under the terms of the 
- *  GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of 
- *  the License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- *  See the GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along with this program; 
- *  if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 
- *  02111-1307 USA
- */
-
 package com.comphenix.packetwrapper;
-
-import org.bukkit.WorldType;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers.Difficulty;
-import com.comphenix.protocol.wrappers.EnumWrappers.NativeGameMode;
 
 public class WrapperPlayServerRespawn extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.RESPAWN;
@@ -37,66 +16,76 @@ public class WrapperPlayServerRespawn extends AbstractPacket {
     }
     
     /**
-     * Retrieve -1: The Nether, 0: The Overworld, 1: The End.
+     * Retrieve Dimension.
+     * <p>
+     * Notes: -1: The Nether, 0: The Overworld, 1: The End
      * @return The current Dimension
-    */
+     */
     public int getDimension() {
         return handle.getIntegers().read(0);
     }
     
     /**
-     * Set -1: The Nether, 0: The Overworld, 1: The End.
+     * Set Dimension.
      * @param value - new value.
-    */
+     */
     public void setDimension(int value) {
         handle.getIntegers().write(0, value);
     }
     
     /**
-     * Retrieve the difficulty level.
+     * Retrieve Difficulty.
+     * <p>
+     * Notes: 0 thru 3 for Peaceful, Easy, Normal, Hard.
      * @return The current Difficulty
-    */
-    public Difficulty getDifficulty() {
-        return handle.getDifficulties().read(0);
+     */
+    public byte getDifficulty() {
+        return (byte) handle.getSpecificModifier(Enum.class).read(0);
     }
     
     /**
-     * Set the difficulty level. 
+     * Set Difficulty.
      * @param value - new value.
-    */
-    public void setDifficulty(Difficulty value) {
-        handle.getDifficulties().write(0, value);
+     */
+    public void setDifficulty(byte value) {
+        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
     }
     
     /**
-     * Retrieve the game mode of the current player.
-     * @return The current game mode
-    */
-    public NativeGameMode getGameMode() {
-        return handle.getGameModes().read(0);
+     * Retrieve Gamemode.
+     * <p>
+     * Notes: 0: survival, 1: creative, 2: adventure. The hardcore flag is not included
+     * @return The current Gamemode
+     */
+    public byte getGamemode() {
+        return (byte) handle.getSpecificModifier(Enum.class).read(0);
     }
     
     /**
-     * Set the game mode of the current player.
-     * @param mode - new value.
-    */
-    public void setGameMode(NativeGameMode mode) {
-        handle.getGameModes().write(0, mode);
+     * Set Gamemode.
+     * @param value - new value.
+     */
+    public void setGamemode(byte value) {
+        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
     }
     
     /**
-     * Retrieve the current level type.
-     * @return The current level type
-    */
-    public WorldType getLevelType() {
-        return handle.getWorldTypeModifier().read(0);
+     * Retrieve Level Type.
+     * <p>
+     * Notes: same as Join Game
+     * @return The current Level Type
+     */
+    public String getLevelType() {
+        return (String) handle.getWorldTypeModifier().read(0);
     }
     
     /**
-     * Set see 0x01 login.
-     * @param value - new world type.
-    */
-    public void setLevelType(WorldType value) {
-        handle.getWorldTypeModifier().write(0, value);
+     * Set Level Type.
+     * @param value - new value.
+     */
+    public void setLevelType(String value) {
+        handle.getWorldTypeModifier().write(0, (WorldType) value);
     }
+    
 }
+
