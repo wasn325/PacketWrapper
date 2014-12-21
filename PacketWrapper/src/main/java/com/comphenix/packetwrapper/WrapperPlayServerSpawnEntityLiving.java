@@ -40,16 +40,16 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * Notes: the type of mob. See Mobs
      * @return The current Type
      */
-    public byte getType() {
-        return (byte) handle.getIntegers().read(1);
+    public int getType() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Type.
      * @param value - new value.
      */
-    public void setType(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setType(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**
@@ -112,16 +112,16 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * Notes: the yaw in steps of 2p/256
      * @return The current Yaw
      */
-    public byte getYaw() {
-        return handle.getBytes().read(0);
+    public int getYaw() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Yaw.
      * @param value - new value.
      */
-    public void setYaw(byte value) {
-        handle.getBytes().write(0, value);
+    public void setYaw(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -130,16 +130,16 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * Notes: the pitch in steps of 2p/256
      * @return The current Pitch
      */
-    public byte getPitch() {
-        return handle.getBytes().read(1);
+    public int getPitch() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Pitch.
      * @param value - new value.
      */
-    public void setPitch(byte value) {
-        handle.getBytes().write(1, value);
+    public void setPitch(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**
@@ -148,64 +148,64 @@ public class WrapperPlayServerSpawnEntityLiving extends AbstractPacket {
      * Notes: the pitch in steps of 2p/256
      * @return The current Head Pitch
      */
-    public byte getHeadPitch() {
-        return handle.getBytes().read(2);
+    public int getHeadPitch() {
+        return handle.getIntegers().read(2);
     }
     
     /**
      * Set Head Pitch.
      * @param value - new value.
      */
-    public void setHeadPitch(byte value) {
-        handle.getBytes().write(2, value);
+    public void setHeadPitch(int value) {
+        handle.getIntegers().write(2, value);
     }
     
     /**
      * Retrieve Velocity X.
      * @return The current Velocity X
      */
-    public short getVelocityX() {
-        return (short) handle.getIntegers().read(5);
+    public int getVelocityX() {
+        return handle.getIntegers().read(5);
     }
     
     /**
      * Set Velocity X.
      * @param value - new value.
      */
-    public void setVelocityX(short value) {
-        handle.getIntegers().write(5, (int) value);
+    public void setVelocityX(int value) {
+        handle.getIntegers().write(5, value);
     }
     
     /**
      * Retrieve Velocity Y.
      * @return The current Velocity Y
      */
-    public short getVelocityY() {
-        return (short) handle.getIntegers().read(6);
+    public int getVelocityY() {
+        return handle.getIntegers().read(6);
     }
     
     /**
      * Set Velocity Y.
      * @param value - new value.
      */
-    public void setVelocityY(short value) {
-        handle.getIntegers().write(6, (int) value);
+    public void setVelocityY(int value) {
+        handle.getIntegers().write(6, value);
     }
     
     /**
      * Retrieve Velocity Z.
      * @return The current Velocity Z
      */
-    public short getVelocityZ() {
-        return (short) handle.getIntegers().read(7);
+    public int getVelocityZ() {
+        return handle.getIntegers().read(7);
     }
     
     /**
      * Set Velocity Z.
      * @param value - new value.
      */
-    public void setVelocityZ(short value) {
-        handle.getIntegers().write(7, (int) value);
+    public void setVelocityZ(int value) {
+        handle.getIntegers().write(7, value);
     }
     
     /**

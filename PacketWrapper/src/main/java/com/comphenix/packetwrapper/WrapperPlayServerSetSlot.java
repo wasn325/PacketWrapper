@@ -23,16 +23,16 @@ public class WrapperPlayServerSetSlot extends AbstractPacket {
      * Notes: the window which is being updated. 0 for player inventory. Note that all known window types include the player inventory. This packet will only be sent for the currently opened window while the player is performing actions, even if it affects the player inventory. After the window is closed, a number of these packets are sent to update the player's inventory window (0).
      * @return The current Window ID
      */
-    public byte getWindowId() {
-        return (byte) handle.getIntegers().read(0);
+    public int getWindowId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Window ID.
      * @param value - new value.
      */
-    public void setWindowId(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setWindowId(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -41,16 +41,16 @@ public class WrapperPlayServerSetSlot extends AbstractPacket {
      * Notes: the slot that should be updated
      * @return The current Slot
      */
-    public short getSlot() {
-        return (short) handle.getIntegers().read(1);
+    public int getSlot() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Slot.
      * @param value - new value.
      */
-    public void setSlot(short value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setSlot(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**

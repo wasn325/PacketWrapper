@@ -23,50 +23,32 @@ public class WrapperPlayServerWindowItems extends AbstractPacket {
      * Notes: the id of window which items are being sent for. 0 for player inventory.
      * @return The current Window ID
      */
-    public byte getWindowId() {
-        return (byte) handle.getIntegers().read(0);
+    public int getWindowId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Window ID.
      * @param value - new value.
      */
-    public void setWindowId(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setWindowId(int value) {
+        handle.getIntegers().write(0, value);
     }
-    
-    /**
-     * Retrieve Count.
-     * <p>
-     * Notes: the number of slots (see below)
-     * @return The current Count
-     */
-    public short getCount() {
-        return (short) handle.getItemArrayModifier().read(0);
-    }
-    
-    /**
-     * Set Count.
-     * @param value - new value.
-     */
-    public void setCount(short value) {
-        handle.getItemArrayModifier().write(0, (ItemStack[]) value);
-    }
-    
+
     /**
      * Retrieve Slot data.
      * @return The current Slot data
      */
-    public ofItemStacks[] getSlotData() {
-        return (ofItemStacks[]) handle.getItemArrayModifier().read(0);
+    public ItemStack[] getSlotData() {
+        return handle.getItemArrayModifier().read(0);
     }
     
     /**
      * Set Slot data.
      * @param value - new value.
      */
-    public void setSlotData(ofItemStacks[] value) {
-        handle.getItemArrayModifier().write(0, (ItemStack[]) value);
+    public void setSlotData(ItemStack[] value) {
+        handle.getItemArrayModifier().write(0, value);
     }
     
 }

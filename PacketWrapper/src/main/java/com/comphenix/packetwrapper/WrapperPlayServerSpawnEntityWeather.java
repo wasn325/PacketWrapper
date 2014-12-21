@@ -39,16 +39,16 @@ public class WrapperPlayServerSpawnEntityWeather extends AbstractPacket {
      * Notes: the global entity type, currently always 1 for thunderbolt.
      * @return The current Type
      */
-    public byte getType() {
-        return (byte) handle.getIntegers().read(4);
+    public int getType() {
+        return handle.getIntegers().read(4);
     }
     
     /**
      * Set Type.
      * @param value - new value.
      */
-    public void setType(byte value) {
-        handle.getIntegers().write(4, (int) value);
+    public void setType(int value) {
+        handle.getIntegers().write(4, value);
     }
     
     /**

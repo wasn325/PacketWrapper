@@ -22,7 +22,7 @@ public class WrapperPlayServerTileEntityData extends AbstractPacket {
      * @return The current Location
      */
     public BlockPosition getLocation() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -30,7 +30,7 @@ public class WrapperPlayServerTileEntityData extends AbstractPacket {
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
     
     /**
@@ -39,16 +39,16 @@ public class WrapperPlayServerTileEntityData extends AbstractPacket {
      * Notes: the type of update to perform
      * @return The current Action
      */
-    public byte getAction() {
-        return (byte) handle.getIntegers().read(0);
+    public int getAction() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Action.
      * @param value - new value.
      */
-    public void setAction(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setAction(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -57,16 +57,16 @@ public class WrapperPlayServerTileEntityData extends AbstractPacket {
      * Notes: if not present then its TAG_END (0)
      * @return The current NBT Data
      */
-    public byte[] getNbtData() {
-        return (byte[]) handle.getNbtModifier().read(0);
+    public NbtBase<?> getNbtData() {
+        return handle.getNbtModifier().read(0);
     }
     
     /**
      * Set NBT Data.
      * @param value - new value.
      */
-    public void setNbtData(byte[] value) {
-        handle.getNbtModifier().write(0, (NbtBase<?>) value);
+    public void setNbtData(NbtBase<?> value) {
+        handle.getNbtModifier().write(0, value);
     }
     
 }

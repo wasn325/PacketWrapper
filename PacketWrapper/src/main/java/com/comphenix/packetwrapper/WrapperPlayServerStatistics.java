@@ -1,7 +1,10 @@
 package com.comphenix.packetwrapper;
 
+import java.util.Map;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.WrappedStatistic;
 
 public class WrapperPlayServerStatistics extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.STATISTICS;
@@ -15,42 +18,13 @@ public class WrapperPlayServerStatistics extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    /**
-     * Retrieve Count.
-     * <p>
-     * Notes: number of entries
-     * @return The current Count
-     */
-    public int getCount() {
-        return (int) handle.getSpecificModifier(Map.class).read(0);
+    @SuppressWarnings("unchecked")
+    public Map<WrappedStatistic, Integer> getStatistics() {
+        return handle.getSpecificModifier(Map.class).read(0);
     }
-    
-    /**
-     * Set Count.
-     * @param value - new value.
-     */
-    public void setCount(int value) {
-        handle.getSpecificModifier(Map.class).write(0, (Map<?,?>) value);
+
+    public void setStatistics(Map<WrappedStatistic, Integer> value) {
+        handle.getSpecificModifier(Map.class).write(0, value);
     }
-    
-    /**
-     * Retrieve Entry.
-     * <p>
-     * Notes: string
-     * @return The current Entry
-     */
-    public statistic'sname getEntry() {
-        return (statistic'sname) handle.getSpecificModifier(Map.class).read(0);
-    }
-    
-    /**
-     * Set Entry.
-     * @param value - new value.
-     */
-    public void setEntry(statistic'sname value) {
-        handle.getSpecificModifier(Map.class).write(0, (Map<?,?>) value);
-    }
-    
-    // Cannot generate field Value
 }
 

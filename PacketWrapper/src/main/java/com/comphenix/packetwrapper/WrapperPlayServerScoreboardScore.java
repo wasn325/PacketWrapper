@@ -2,6 +2,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers.ScoreboardAction;
 
 public class WrapperPlayServerScoreboardScore extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.SCOREBOARD_SCORE;
@@ -32,25 +33,7 @@ public class WrapperPlayServerScoreboardScore extends AbstractPacket {
     public void setScoreName(String value) {
         handle.getStrings().write(0, value);
     }
-    
-    /**
-     * Retrieve Update/Remove.
-     * <p>
-     * Notes: 0 to create/update an item. 1 to remove an item.
-     * @return The current Update/Remove
-     */
-    public byte getUpdateRemove() {
-        return (byte) handle.getSpecificModifier(Enum.class).read(0);
-    }
-    
-    /**
-     * Set Update/Remove.
-     * @param value - new value.
-     */
-    public void setUpdateRemove(byte value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
-    }
-    
+
     /**
      * Retrieve Objective Name.
      * <p>
@@ -76,7 +59,7 @@ public class WrapperPlayServerScoreboardScore extends AbstractPacket {
      * @return The current Value
      */
     public int getValue() {
-        return (int) handle.getSpecificModifier(Enum.class).read(0);
+        return handle.getIntegers().read(0);
     }
     
     /**
@@ -84,7 +67,15 @@ public class WrapperPlayServerScoreboardScore extends AbstractPacket {
      * @param value - new value.
      */
     public void setValue(int value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+        handle.getIntegers().write(0, value);
+    }
+
+    public ScoreboardAction getAction() {
+        return handle.getScoreboardActions().read(0);
+    }
+
+    public void setScoreboardAction(ScoreboardAction value) {
+        handle.getScoreboardActions().write(0, value);
     }
     
 }

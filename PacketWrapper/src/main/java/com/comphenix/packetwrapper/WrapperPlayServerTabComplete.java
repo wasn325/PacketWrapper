@@ -22,15 +22,7 @@ public class WrapperPlayServerTabComplete extends AbstractPacket {
      * @return The current Count
      */
     public int getCount() {
-        return (int) handle.getStringArrays().read(0);
-    }
-    
-    /**
-     * Set Count.
-     * @param value - new value.
-     */
-    public void setCount(int value) {
-        handle.getStringArrays().write(0, (String[]) value);
+        return handle.getStringArrays().read(0).length;
     }
     
     /**
@@ -39,16 +31,16 @@ public class WrapperPlayServerTabComplete extends AbstractPacket {
      * Notes: one eligible command, note that each command is sent separately instead of in a single string, hence the need for Count
      * @return The current Match
      */
-    public String getMatch() {
-        return (String) handle.getStringArrays().read(0);
+    public String[] getMatches() {
+        return handle.getStringArrays().read(0);
     }
     
     /**
      * Set Match.
      * @param value - new value.
      */
-    public void setMatch(String value) {
-        handle.getStringArrays().write(0, (String[]) value);
+    public void setMatches(String[] value) {
+        handle.getStringArrays().write(0, value);
     }
     
 }

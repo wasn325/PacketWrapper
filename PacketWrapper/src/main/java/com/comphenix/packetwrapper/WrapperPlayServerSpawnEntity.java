@@ -39,16 +39,16 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * Notes: the type of object (See Objects)
      * @return The current Type
      */
-    public byte getType() {
-        return (byte) handle.getIntegers().read(9);
+    public int getType() {
+        return handle.getIntegers().read(9);
     }
     
     /**
      * Set Type.
      * @param value - new value.
      */
-    public void setType(byte value) {
-        handle.getIntegers().write(9, (int) value);
+    public void setType(int value) {
+        handle.getIntegers().write(9, value);
     }
     
     /**
@@ -111,16 +111,16 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * Notes: the pitch in steps of 2p/256
      * @return The current Pitch
      */
-    public byte getPitch() {
-        return (byte) handle.getIntegers().read(7);
+    public int getPitch() {
+        return handle.getIntegers().read(7);
     }
     
     /**
      * Set Pitch.
      * @param value - new value.
      */
-    public void setPitch(byte value) {
-        handle.getIntegers().write(7, (int) value);
+    public void setPitch(int value) {
+        handle.getIntegers().write(7, value);
     }
     
     /**
@@ -129,32 +129,16 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * Notes: the yaw in steps of 2p/256
      * @return The current Yaw
      */
-    public byte getYaw() {
-        return (byte) handle.getIntegers().read(8);
+    public int getYaw() {
+        return handle.getIntegers().read(8);
     }
     
     /**
      * Set Yaw.
      * @param value - new value.
      */
-    public void setYaw(byte value) {
-        handle.getIntegers().write(8, (int) value);
-    }
-    
-    /**
-     * Retrieve Data.
-     * @return The current Data
-     */
-    public objectdata getData() {
-        return (objectdata) handle.getIntegers().read(10);
-    }
-    
-    /**
-     * Set Data.
-     * @param value - new value.
-     */
-    public void setData(objectdata value) {
-        handle.getIntegers().write(10, (int) value);
+    public void setYaw(int value) {
+        handle.getIntegers().write(8, value);
     }
     
 }

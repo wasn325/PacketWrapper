@@ -21,16 +21,16 @@ public class WrapperPlayServerScoreboardDisplayObjective extends AbstractPacket 
      * Notes: the position of the scoreboard. 0 = list, 1 = sidebar, 2 = belowName.
      * @return The current Position
      */
-    public byte getPosition() {
-        return (byte) handle.getIntegers().read(0);
+    public int getPosition() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Position.
      * @param value - new value.
      */
-    public void setPosition(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setPosition(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**

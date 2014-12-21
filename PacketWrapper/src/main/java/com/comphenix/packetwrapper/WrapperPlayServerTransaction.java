@@ -21,16 +21,16 @@ public class WrapperPlayServerTransaction extends AbstractPacket {
      * Notes: the id of the window that the action occurred in.
      * @return The current Window ID
      */
-    public byte getWindowId() {
-        return (byte) handle.getIntegers().read(0);
+    public int getWindowId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Window ID.
      * @param value - new value.
      */
-    public void setWindowId(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setWindowId(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -58,7 +58,7 @@ public class WrapperPlayServerTransaction extends AbstractPacket {
      * @return The current Accepted
      */
     public boolean getAccepted() {
-        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
+        return handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
@@ -66,7 +66,7 @@ public class WrapperPlayServerTransaction extends AbstractPacket {
      * @param value - new value.
      */
     public void setAccepted(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
+        handle.getSpecificModifier(boolean.class).write(0, value);
     }
     
 }

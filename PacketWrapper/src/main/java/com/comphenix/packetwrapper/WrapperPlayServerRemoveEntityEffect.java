@@ -37,16 +37,16 @@ public class WrapperPlayServerRemoveEntityEffect extends AbstractPacket {
      * Retrieve Effect ID.
      * @return The current Effect ID
      */
-    public byte getEffectId() {
-        return (byte) handle.getIntegers().read(1);
+    public int getEffectId() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Effect ID.
      * @param value - new value.
      */
-    public void setEffectId(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setEffectId(int value) {
+        handle.getIntegers().write(1, value);
     }
     
 }

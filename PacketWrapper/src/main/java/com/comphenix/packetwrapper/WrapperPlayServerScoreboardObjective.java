@@ -39,16 +39,16 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
      * Notes: 0 to create the scoreboard. 1 to remove the scoreboard. 2 to update the display text.
      * @return The current Mode
      */
-    public byte getMode() {
-        return (byte) handle.getIntegers().read(0);
+    public int getMode() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Mode.
      * @param value - new value.
      */
-    public void setMode(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setMode(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -58,7 +58,7 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
      * @return The current Objective value
      */
     public String getObjectiveValue() {
-        return (String) handle.getIntegers().read(0);
+        return handle.getStrings().read(0);
     }
     
     /**
@@ -66,26 +66,10 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
      * @param value - new value.
      */
     public void setObjectiveValue(String value) {
-        handle.getIntegers().write(0, (int) value);
+        handle.getStrings().read(0);
     }
-    
-    /**
-     * Retrieve Type.
-     * <p>
-     * Notes: only if mode is 0 or 2. "integer" or "hearts"
-     * @return The current Type
-     */
-    public String getType() {
-        return handle.getStrings().read(1);
-    }
-    
-    /**
-     * Set Type.
-     * @param value - new value.
-     */
-    public void setType(String value) {
-        handle.getStrings().write(1, value);
-    }
+
+    // TODO: Type
     
 }
 

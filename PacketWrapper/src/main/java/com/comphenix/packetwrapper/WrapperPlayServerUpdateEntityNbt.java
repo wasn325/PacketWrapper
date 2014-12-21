@@ -36,16 +36,16 @@ public class WrapperPlayServerUpdateEntityNbt extends AbstractPacket {
      * Retrieve Tag.
      * @return The current Tag
      */
-    public nbttag getTag() {
-        return (nbttag) handle.getNbtModifier().read(0);
+    public NbtBase<?> getTag() {
+        return handle.getNbtModifier().read(0);
     }
     
     /**
      * Set Tag.
      * @param value - new value.
      */
-    public void setTag(nbttag value) {
-        handle.getNbtModifier().write(0, (NbtBase<?>) value);
+    public void setTag(NbtBase<?> value) {
+        handle.getNbtModifier().write(0, value);
     }
     
 }

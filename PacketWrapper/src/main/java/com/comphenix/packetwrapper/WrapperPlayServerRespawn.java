@@ -4,6 +4,8 @@ import org.bukkit.WorldType;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers.Difficulty;
+import com.comphenix.protocol.wrappers.EnumWrappers.NativeGameMode;
 
 public class WrapperPlayServerRespawn extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.RESPAWN;
@@ -41,16 +43,16 @@ public class WrapperPlayServerRespawn extends AbstractPacket {
      * Notes: 0 thru 3 for Peaceful, Easy, Normal, Hard.
      * @return The current Difficulty
      */
-    public byte getDifficulty() {
-        return (byte) handle.getSpecificModifier(Enum.class).read(0);
+    public Difficulty getDifficulty() {
+        return handle.getDifficulties().read(0);
     }
     
     /**
      * Set Difficulty.
      * @param value - new value.
      */
-    public void setDifficulty(byte value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setDifficulty(Difficulty value) {
+        handle.getDifficulties().write(0, value);
     }
     
     /**
@@ -59,16 +61,16 @@ public class WrapperPlayServerRespawn extends AbstractPacket {
      * Notes: 0: survival, 1: creative, 2: adventure. The hardcore flag is not included
      * @return The current Gamemode
      */
-    public byte getGamemode() {
-        return (byte) handle.getSpecificModifier(Enum.class).read(0);
+    public NativeGameMode getGamemode() {
+        return handle.getGameModes().read(0);
     }
     
     /**
      * Set Gamemode.
      * @param value - new value.
      */
-    public void setGamemode(byte value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setGamemode(NativeGameMode value) {
+        handle.getGameModes().write(0, value);
     }
     
     /**
@@ -77,16 +79,16 @@ public class WrapperPlayServerRespawn extends AbstractPacket {
      * Notes: same as Join Game
      * @return The current Level Type
      */
-    public String getLevelType() {
-        return (String) handle.getWorldTypeModifier().read(0);
+    public WorldType getLevelType() {
+        return handle.getWorldTypeModifier().read(0);
     }
     
     /**
      * Set Level Type.
      * @param value - new value.
      */
-    public void setLevelType(String value) {
-        handle.getWorldTypeModifier().write(0, (WorldType) value);
+    public void setLevelType(WorldType value) {
+        handle.getWorldTypeModifier().write(0, value);
     }
     
 }

@@ -93,16 +93,16 @@ public class WrapperPlayServerSpawnEntityExperienceOrb extends AbstractPacket {
      * Notes: the amount of experience this orb will reward once collected
      * @return The current Count
      */
-    public short getCount() {
-        return (short) handle.getIntegers().read(4);
+    public int getCount() {
+        return handle.getIntegers().read(4);
     }
     
     /**
      * Set Count.
      * @param value - new value.
      */
-    public void setCount(short value) {
-        handle.getIntegers().write(4, (int) value);
+    public void setCount(int value) {
+        handle.getIntegers().write(4, value);
     }
     
 }

@@ -15,21 +15,7 @@ public class WrapperPlayServerWorldParticles extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    /**
-     * Retrieve Particle Id.
-     * @return The current Particle Id
-     */
-    public int getParticleId() {
-        return (int) handle.getSpecificModifier(Enum.class).read(0);
-    }
-    
-    /**
-     * Set Particle Id.
-     * @param value - new value.
-     */
-    public void setParticleId(int value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
-    }
+    // TODO: Particle id
     
     /**
      * Retrieve Long Distance.
@@ -199,16 +185,16 @@ public class WrapperPlayServerWorldParticles extends AbstractPacket {
      * Notes: length depends on particle. ICON_CRACK, BLOCK_CRACK, and BLOCK_DUST have lengths of 2, the rest have 0.
      * @return The current Data
      */
-    public ofint[] getData() {
-        return (ofint[]) handle.getSpecificModifier(Enum.class).read(0);
+    public int[] getData() {
+        return handle.getIntegerArrays().read(0);
     }
     
     /**
      * Set Data.
      * @param value - new value.
      */
-    public void setData(ofint[] value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setData(int[] value) {
+        handle.getIntegerArrays().write(0, value);
     }
     
 }
