@@ -21,16 +21,16 @@ public class WrapperPlayClientSpectate extends AbstractPacket {
      * Retrieve Target Player.
      * @return The current Target Player
      */
-    public uuid getTargetPlayer() {
-        return (uuid) handle.getSpecificModifier(UUID.class).read(0);
+    public UUID getTargetPlayer() {
+        return handle.getSpecificModifier(UUID.class).read(0);
     }
     
     /**
      * Set Target Player.
      * @param value - new value.
      */
-    public void setTargetPlayer(uuid value) {
-        handle.getSpecificModifier(UUID.class).write(0, (UUID) value);
+    public void setTargetPlayer(UUID value) {
+        handle.getSpecificModifier(UUID.class).write(0, value);
     }
     
 }

@@ -37,7 +37,7 @@ public class WrapperPlayClientTabComplete extends AbstractPacket {
      * @return The current Has Position
      */
     public BlockPosition getHasPosition() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -45,7 +45,7 @@ public class WrapperPlayClientTabComplete extends AbstractPacket {
      * @param value - new value.
      */
     public void setHasPosition(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
     
     /**
@@ -55,7 +55,7 @@ public class WrapperPlayClientTabComplete extends AbstractPacket {
      * @return The current Looked at block
      */
     public BlockPosition getLookedAtBlock() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -63,7 +63,7 @@ public class WrapperPlayClientTabComplete extends AbstractPacket {
      * @param value - new value.
      */
     public void setLookedAtBlock(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
     
 }

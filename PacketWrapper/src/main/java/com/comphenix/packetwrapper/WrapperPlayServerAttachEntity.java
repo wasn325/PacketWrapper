@@ -57,16 +57,16 @@ public class WrapperPlayServerAttachEntity extends AbstractPacket {
      * Notes: if true leashes the entity to the vehicle
      * @return The current Leash
      */
-    public boolean getLeash() {
-        return (boolean) handle.getIntegers().read(0);
+    public int getLeash() {
+        return  handle.getIntegers().read(0);
     }
     
     /**
      * Set Leash.
      * @param value - new value.
      */
-    public void setLeash(boolean value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setLeash(int value) {
+        handle.getIntegers().write(0, value);
     }
     
 }

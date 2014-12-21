@@ -2,6 +2,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers.ChatVisibility;
 
 public class WrapperPlayClientSettings extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Client.SETTINGS;
@@ -39,8 +40,8 @@ public class WrapperPlayClientSettings extends AbstractPacket {
      * Notes: client-side render distance(chunks)
      * @return The current View distance
      */
-    public byte getViewDistance() {
-        return (byte) handle.getIntegers().read(0);
+    public int getViewDistance() {
+        return handle.getIntegers().read(0);
     }
     
     /**
@@ -57,16 +58,16 @@ public class WrapperPlayClientSettings extends AbstractPacket {
      * Notes: chat settings. See notes below.
      * @return The current Chat flags
      */
-    public byte getChatFlags() {
-        return (byte) handle.getSpecificModifier(Enum.class).read(0);
+    public ChatVisibility getChatFlags() {
+    	return handle.getChatVisibilities().read(0);
     }
     
     /**
      * Set Chat flags.
      * @param value - new value.
      */
-    public void setChatFlags(byte value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setChatFlags(ChatVisibility value) {
+        handle.getChatVisibilities().write(0, value);
     }
     
     /**
@@ -76,7 +77,7 @@ public class WrapperPlayClientSettings extends AbstractPacket {
      * @return The current Chat colours
      */
     public boolean getChatColours() {
-        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
+        return handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
@@ -84,7 +85,7 @@ public class WrapperPlayClientSettings extends AbstractPacket {
      * @param value - new value.
      */
     public void setChatColours(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
+        handle.getSpecificModifier(boolean.class).write(0, value);
     }
     
     /**
@@ -93,16 +94,16 @@ public class WrapperPlayClientSettings extends AbstractPacket {
      * Notes: skin parts. See note below
      * @return The current Displayed skin parts
      */
-    public byte getDisplayedSkinParts() {
-        return (byte) handle.getIntegers().read(1);
+    public int getDisplayedSkinParts() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Displayed skin parts.
      * @param value - new value.
      */
-    public void setDisplayedSkinParts(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setDisplayedSkinParts(int value) {
+        handle.getIntegers().write(1, value);
     }
     
 }

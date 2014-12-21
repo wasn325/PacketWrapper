@@ -50,23 +50,21 @@ public class WrapperPlayClientSteerVehicle extends AbstractPacket {
     public void setForward(float value) {
         handle.getFloat().write(1, value);
     }
-    
-    /**
-     * Retrieve Flags.
-     * <p>
-     * Notes: 0x1 Jump, 0x2 Unmount
-     * @return The current Flags
-     */
-    public byte getFlags() {
-        return (byte) handle.getSpecificModifier(boolean.class).read(0);
+
+    public boolean isJump() {
+    	return handle.getBooleans().read(0);
     }
-    
-    /**
-     * Set Flags.
-     * @param value - new value.
-     */
-    public void setFlags(byte value) {
-        handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
+
+    public void setJump(boolean value) {
+    	handle.getBooleans().write(0, value);
+    }
+
+    public boolean isUnmount() {
+    	return handle.getBooleans().read(0);
+    }
+
+    public void setUnmount(boolean value) {
+    	handle.getBooleans().write(0, value);
     }
     
 }

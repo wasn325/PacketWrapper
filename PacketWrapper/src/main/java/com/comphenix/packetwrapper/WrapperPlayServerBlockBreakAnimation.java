@@ -41,7 +41,7 @@ public class WrapperPlayServerBlockBreakAnimation extends AbstractPacket {
      * @return The current Location
      */
     public BlockPosition getLocation() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -49,7 +49,7 @@ public class WrapperPlayServerBlockBreakAnimation extends AbstractPacket {
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
     
     /**
@@ -58,16 +58,16 @@ public class WrapperPlayServerBlockBreakAnimation extends AbstractPacket {
      * Notes: 0 - 9
      * @return The current Destroy Stage
      */
-    public byte getDestroyStage() {
-        return (byte) handle.getIntegers().read(1);
+    public int getDestroyStage() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Destroy Stage.
      * @param value - new value.
      */
-    public void setDestroyStage(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setDestroyStage(int value) {
+        handle.getIntegers().write(1, value);
     }
     
 }

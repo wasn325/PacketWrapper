@@ -15,40 +15,52 @@ public class WrapperPlayServerAbilities extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    /**
-     * Retrieve Flags.
-     * @return The current Flags
-     */
-    public byte getFlags() {
-        return (byte) handle.getFloat().read(0);
+    public boolean isInvulnurable() {
+    	return handle.getBooleans().read(0);
     }
-    
-    /**
-     * Set Flags.
-     * @param value - new value.
-     */
-    public void setFlags(byte value) {
-        handle.getFloat().write(0, (float) value);
+
+    public void setInvulnurable(boolean value) {
+    	handle.getBooleans().write(0, value);
     }
-    
-    /**
-     * Retrieve Flying speed.
-     * <p>
-     * Notes: previous integer value divided by 250
-     * @return The current Flying speed
-     */
+
+    public boolean isFlying() {
+    	return handle.getBooleans().read(0);
+    }
+
+    public void setFlying(boolean value) {
+    	handle.getBooleans().write(0, value);
+    }
+
+    public boolean canFly() {
+    	return handle.getBooleans().read(0);
+    }
+
+    public void setCanFly(boolean value) {
+    	handle.getBooleans().write(0, value);
+    }
+
+    public boolean canInstantlyBuild() {
+    	return handle.getBooleans().read(0);
+    }
+
+    public void setCanInstantlyBuild(boolean value) {
+    	handle.getBooleans().write(0, value);
+    }
+
     public float getFlyingSpeed() {
-        return handle.getFloat().read(1);
+    	return handle.getFloat().read(0);
     }
-    
-    /**
-     * Set Flying speed.
-     * @param value - new value.
-     */
+
     public void setFlyingSpeed(float value) {
-        handle.getFloat().write(1, value);
+    	handle.getFloat().write(0, value);
     }
-    
-    // Cannot generate field Walking speed
+
+    public float getWalkingSpeed() {
+    	return handle.getFloat().read(0);
+    }
+
+    public void setWalkingSpeed(float value) {
+    	handle.getFloat().write(0, value);
+    }
 }
 

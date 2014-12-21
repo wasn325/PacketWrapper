@@ -25,7 +25,7 @@ public class WrapperPlayServerBlockAction extends AbstractPacket {
      * @return The current Location
      */
     public BlockPosition getLocation() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -33,7 +33,7 @@ public class WrapperPlayServerBlockAction extends AbstractPacket {
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
     
     /**
@@ -42,16 +42,16 @@ public class WrapperPlayServerBlockAction extends AbstractPacket {
      * Notes: varies depending on block - see Block_Actions
      * @return The current Byte 1
      */
-    public byte getByte1() {
-        return (byte) handle.getIntegers().read(0);
+    public int getByte1() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Byte 1.
      * @param value - new value.
      */
-    public void setByte1(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setByte1(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -60,16 +60,16 @@ public class WrapperPlayServerBlockAction extends AbstractPacket {
      * Notes: varies depending on block - see Block_Actions
      * @return The current Byte 2
      */
-    public byte getByte2() {
-        return (byte) handle.getIntegers().read(1);
+    public int getByte2() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Byte 2.
      * @param value - new value.
      */
-    public void setByte2(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setByte2(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**

@@ -23,16 +23,16 @@ public class WrapperPlayClientWindowClick extends AbstractPacket {
      * Notes: the id of the window which was clicked. 0 for player inventory.
      * @return The current Window ID
      */
-    public byte getWindowId() {
-        return (byte) handle.getIntegers().read(0);
+    public int getWindowId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Window ID.
      * @param value - new value.
      */
-    public void setWindowId(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setWindowId(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -41,16 +41,16 @@ public class WrapperPlayClientWindowClick extends AbstractPacket {
      * Notes: the clicked slot. See below.
      * @return The current Slot
      */
-    public short getSlot() {
-        return (short) handle.getIntegers().read(1);
+    public int getSlot() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Slot.
      * @param value - new value.
      */
-    public void setSlot(short value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setSlot(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**
@@ -59,16 +59,16 @@ public class WrapperPlayClientWindowClick extends AbstractPacket {
      * Notes: the button used in the click. See below.
      * @return The current Button
      */
-    public byte getButton() {
-        return (byte) handle.getIntegers().read(2);
+    public int getButton() {
+        return handle.getIntegers().read(2);
     }
     
     /**
      * Set Button.
      * @param value - new value.
      */
-    public void setButton(byte value) {
-        handle.getIntegers().write(2, (int) value);
+    public void setButton(int value) {
+        handle.getIntegers().write(2, value);
     }
     
     /**
@@ -95,16 +95,16 @@ public class WrapperPlayClientWindowClick extends AbstractPacket {
      * Notes: inventory operation mode. See below.
      * @return The current Mode
      */
-    public byte getMode() {
-        return (byte) handle.getIntegers().read(3);
+    public int getMode() {
+        return handle.getIntegers().read(3);
     }
     
     /**
      * Set Mode.
      * @param value - new value.
      */
-    public void setMode(byte value) {
-        handle.getIntegers().write(3, (int) value);
+    public void setMode(int value) {
+        handle.getIntegers().write(3,  value);
     }
     
     /**

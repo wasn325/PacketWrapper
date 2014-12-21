@@ -39,16 +39,16 @@ public class WrapperPlayServerAnimation extends AbstractPacket {
      * Notes: animation ID
      * @return The current Animation
      */
-    public byte getAnimation() {
-        return (byte) handle.getIntegers().read(1);
+    public int getAnimation() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Animation.
      * @param value - new value.
      */
-    public void setAnimation(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setAnimation(int value) {
+        handle.getIntegers().write(1,  value);
     }
     
 }
