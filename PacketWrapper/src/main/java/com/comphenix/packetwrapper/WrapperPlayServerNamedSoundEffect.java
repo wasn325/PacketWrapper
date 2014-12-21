@@ -109,8 +109,8 @@ public class WrapperPlayServerNamedSoundEffect extends AbstractPacket {
      * Notes: 63 is 100%, can be more
      * @return The current Pitch
      */
-    public byte getPitch() {
-        return (byte) handle.getIntegers().read(3);
+    public int getPitch() {
+        return handle.getIntegers().read(3);
     }
     
     /**

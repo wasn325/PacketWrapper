@@ -1,8 +1,10 @@
 package com.comphenix.packetwrapper;
 
+import java.util.List;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.BlockPosition;
+import com.comphenix.protocol.wrappers.WrappedWatchableObject;
 
 public class WrapperPlayServerEntityMetadata extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.ENTITY_METADATA;
@@ -38,16 +40,16 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
      * Retrieve Metadata.
      * @return The current Metadata
      */
-    public List<BlockPosition> getMetadata() {
-        return handle.getPositionCollectionModifier().read(0);
+    public List<WrappedWatchableObject> getMetadata() {
+    	return handle.getWatchableCollectionModifier().read(0);
     }
     
     /**
      * Set Metadata.
      * @param value - new value.
      */
-    public void setMetadata(List<BlockPosition> value) {
-        handle.getPositionCollectionModifier().write(0, value);
+    public void setMetadata(List<WrappedWatchableObject> value) {
+        handle.getWatchableCollectionModifier().write(0, value);
     }
     
 }

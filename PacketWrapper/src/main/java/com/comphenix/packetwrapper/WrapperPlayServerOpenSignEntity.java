@@ -23,7 +23,7 @@ public class WrapperPlayServerOpenSignEntity extends AbstractPacket {
      * @return The current Location
      */
     public BlockPosition getLocation() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -31,7 +31,7 @@ public class WrapperPlayServerOpenSignEntity extends AbstractPacket {
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
     
 }

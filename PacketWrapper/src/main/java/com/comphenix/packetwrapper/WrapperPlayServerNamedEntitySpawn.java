@@ -42,16 +42,16 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
      * Notes: player's UUID
      * @return The current Player UUID
      */
-    public uuid getPlayerUuid() {
-        return (uuid) handle.getSpecificModifier(UUID.class).read(0);
+    public UUID getPlayerUuid() {
+        return handle.getSpecificModifier(UUID.class).read(0);
     }
     
     /**
      * Set Player UUID.
      * @param value - new value.
      */
-    public void setPlayerUuid(uuid value) {
-        handle.getSpecificModifier(UUID.class).write(0, (UUID) value);
+    public void setPlayerUuid(UUID value) {
+        handle.getSpecificModifier(UUID.class).write(0, value);
     }
     
     /**
@@ -150,16 +150,16 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
      * Notes: the item the player is currently holding. Note that this should be 0 for "no item", unlike -1 used in other packets. A negative value crashes clients.
      * @return The current Current Item
      */
-    public short getCurrentItem() {
-        return (short) handle.getIntegers().read(4);
+    public int getCurrentItem() {
+        return handle.getIntegers().read(4);
     }
     
     /**
      * Set Current Item.
      * @param value - new value.
      */
-    public void setCurrentItem(short value) {
-        handle.getIntegers().write(4, (int) value);
+    public void setCurrentItem(int value) {
+        handle.getIntegers().write(4, value);
     }
     
     /**

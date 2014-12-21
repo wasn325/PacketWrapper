@@ -19,16 +19,16 @@ public class WrapperPlayServerGameStateChange extends AbstractPacket {
      * Retrieve Reason.
      * @return The current Reason
      */
-    public byte getReason() {
-        return (byte) handle.getIntegers().read(0);
+    public int getReason() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Reason.
      * @param value - new value.
      */
-    public void setReason(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setReason(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**

@@ -22,15 +22,7 @@ public class WrapperPlayServerEntityDestroy extends AbstractPacket {
      * @return The current Count
      */
     public int getCount() {
-        return (int) handle.getIntegerArrays().read(0);
-    }
-    
-    /**
-     * Set Count.
-     * @param value - new value.
-     */
-    public void setCount(int value) {
-        handle.getIntegerArrays().write(0, (int[]) value);
+        return handle.getIntegerArrays().read(0).length;
     }
     
     /**
@@ -39,16 +31,16 @@ public class WrapperPlayServerEntityDestroy extends AbstractPacket {
      * Notes: the list of entities of destroy
      * @return The current Entity IDs
      */
-    public ofint[] getEntityIds() {
-        return (ofint[]) handle.getIntegerArrays().read(0);
+    public int[] getEntityIds() {
+        return handle.getIntegerArrays().read(0);
     }
     
     /**
      * Set Entity IDs.
      * @param value - new value.
      */
-    public void setEntityIds(ofint[] value) {
-        handle.getIntegerArrays().write(0, (int[]) value);
+    public void setEntityIds(int[] value) {
+        handle.getIntegerArrays().write(0, value);
     }
     
 }

@@ -41,16 +41,16 @@ public class WrapperPlayServerEntityEquipment extends AbstractPacket {
      * Notes: equipment slot: 0=held, 1-4=armor slot (1 - boots, 2 - leggings, 3 - chestplate, 4 - helmet)
      * @return The current Slot
      */
-    public short getSlot() {
-        return (short) handle.getIntegers().read(1);
+    public int getSlot() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Slot.
      * @param value - new value.
      */
-    public void setSlot(short value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setSlot(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**

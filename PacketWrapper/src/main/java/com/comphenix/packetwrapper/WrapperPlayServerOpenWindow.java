@@ -22,16 +22,16 @@ public class WrapperPlayServerOpenWindow extends AbstractPacket {
      * Notes: a unique id number for the window to be displayed. Notchian server implementation is a counter, starting at 1.
      * @return The current Window id
      */
-    public byte getWindowId() {
-        return (byte) handle.getIntegers().read(0);
+    public int getWindowId() {
+        return handle.getIntegers().read(0);
     }
     
     /**
      * Set Window id.
      * @param value - new value.
      */
-    public void setWindowId(byte value) {
-        handle.getIntegers().write(0, (int) value);
+    public void setWindowId(int value) {
+        handle.getIntegers().write(0, value);
     }
     
     /**
@@ -76,16 +76,16 @@ public class WrapperPlayServerOpenWindow extends AbstractPacket {
      * Notes: number of slots in the window (excluding the number of slots in the player inventory).
      * @return The current Number of Slots
      */
-    public byte getNumberOfSlots() {
-        return (byte) handle.getIntegers().read(1);
+    public int getNumberOfSlots() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Number of Slots.
      * @param value - new value.
      */
-    public void setNumberOfSlots(byte value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setNumberOfSlots(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**
@@ -95,7 +95,7 @@ public class WrapperPlayServerOpenWindow extends AbstractPacket {
      * @return The current Entity ID
      */
     public int getEntityId() {
-        return (int) handle.getStrings().read(0);
+        return handle.getIntegers().read(2);
     }
     
     /**
@@ -103,7 +103,7 @@ public class WrapperPlayServerOpenWindow extends AbstractPacket {
      * @param value - new value.
      */
     public void setEntityId(int value) {
-        handle.getStrings().write(0, (String) value);
+        handle.getIntegers().write(2, value);
     }
     
 }

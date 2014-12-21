@@ -88,7 +88,7 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
      * @return The current Hide Particles
      */
     public boolean getHideParticles() {
-        return (boolean) handle.getBytes().read(2);
+        return handle.getBooleans().read(0);
     }
     
     /**
@@ -96,7 +96,7 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
      * @param value - new value.
      */
     public void setHideParticles(boolean value) {
-        handle.getBytes().write(2, (byte) value);
+        handle.getBooleans().write(0, value);
     }
     
 }
