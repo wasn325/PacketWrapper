@@ -1,5 +1,7 @@
 package com.comphenix.packetwrapper;
 
+import org.bukkit.inventory.ItemStack;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 

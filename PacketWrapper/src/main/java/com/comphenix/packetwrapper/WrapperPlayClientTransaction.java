@@ -57,15 +57,15 @@ public class WrapperPlayClientTransaction extends AbstractPacket {
      * Notes: whether the action was accepted.
      * @return The current Accepted
      */
-    public bool getAccepted() {
-        return (bool) handle.getSpecificModifier(boolean.class).read(0);
+    public boolean getAccepted() {
+        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
      * Set Accepted.
      * @param value - new value.
      */
-    public void setAccepted(bool value) {
+    public void setAccepted(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     

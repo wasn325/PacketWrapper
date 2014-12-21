@@ -22,15 +22,7 @@ public class WrapperLoginClientEncryptionBegin extends AbstractPacket {
      * @return The current Length
      */
     public int getLength() {
-        return (int) handle.getByteArrays().read(0);
-    }
-    
-    /**
-     * Set Length.
-     * @param value - new value.
-     */
-    public void setLength(int value) {
-        handle.getByteArrays().write(0, (byte[]) value);
+        return handle.getByteArrays().read(0).length;
     }
     
     /**

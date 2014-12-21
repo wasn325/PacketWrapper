@@ -2,6 +2,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.BlockPosition;
 
 public class WrapperPlayServerWorldEvent extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.WORLD_EVENT;
@@ -75,15 +76,15 @@ public class WrapperPlayServerWorldEvent extends AbstractPacket {
      * Notes: see above
      * @return The current Disable relative volume
      */
-    public bool getDisableRelativeVolume() {
-        return (bool) handle.getSpecificModifier(boolean.class).read(0);
+    public boolean getDisableRelativeVolume() {
+        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
      * Set Disable relative volume.
      * @param value - new value.
      */
-    public void setDisableRelativeVolume(bool value) {
+    public void setDisableRelativeVolume(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     

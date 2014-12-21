@@ -2,6 +2,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers.PlayerAction;
 
 public class WrapperPlayClientEntityAction extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Client.ENTITY_ACTION;
@@ -39,16 +40,16 @@ public class WrapperPlayClientEntityAction extends AbstractPacket {
      * Notes: the ID of the action, see below.
      * @return The current Action ID
      */
-    public int getActionId() {
-        return (int) handle.getSpecificModifier(Enum.class).read(0);
+    public PlayerAction getAction() {
+        return handle.getPlayerActions().read(0);
     }
     
     /**
      * Set Action ID.
      * @param value - new value.
      */
-    public void setActionId(int value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setAction(PlayerAction value) {
+        handle.getPlayerActions().write(0, value);
     }
     
     /**

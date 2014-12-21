@@ -21,15 +21,15 @@ public class WrapperPlayServerMapChunkBulk extends AbstractPacket {
      * Notes: whether or not the chunk data contains a light nibble array. This is true in the main world, false in the end + nether
      * @return The current Sky light sent
      */
-    public bool getSkyLightSent() {
-        return (bool) handle.getSpecificModifier(boolean.class).read(0);
+    public boolean getSkyLightSent() {
+        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
      * Set Sky light sent.
      * @param value - new value.
      */
-    public void setSkyLightSent(bool value) {
+    public void setSkyLightSent(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     

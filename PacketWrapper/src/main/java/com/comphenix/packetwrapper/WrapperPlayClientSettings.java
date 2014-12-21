@@ -75,15 +75,15 @@ public class WrapperPlayClientSettings extends AbstractPacket {
      * Notes: "Colours" multiplayer setting
      * @return The current Chat colours
      */
-    public bool getChatColours() {
-        return (bool) handle.getSpecificModifier(boolean.class).read(0);
+    public boolean getChatColours() {
+        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
      * Set Chat colours.
      * @param value - new value.
      */
-    public void setChatColours(bool value) {
+    public void setChatColours(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     

@@ -111,15 +111,15 @@ public class WrapperPlayClientPositionLook extends AbstractPacket {
      * Notes: true if the client is on the ground, False otherwise
      * @return The current On Ground
      */
-    public bool getOnGround() {
-        return (bool) handle.getSpecificModifier(boolean.class).read(0);
+    public boolean getOnGround() {
+        return (boolean) handle.getSpecificModifier(boolean.class).read(0);
     }
     
     /**
      * Set On Ground.
      * @param value - new value.
      */
-    public void setOnGround(bool value) {
+    public void setOnGround(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, (boolean) value);
     }
     

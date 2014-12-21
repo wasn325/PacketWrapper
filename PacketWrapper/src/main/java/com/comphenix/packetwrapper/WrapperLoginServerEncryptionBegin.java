@@ -39,17 +39,9 @@ public class WrapperLoginServerEncryptionBegin extends AbstractPacket {
      * Notes: length of public key
      * @return The current Length
      */
-    public int getLength() {
-        return (int) handle.getSpecificModifier(PublicKey.class).read(0);
-    }
-    
-    /**
-     * Set Length.
-     * @param value - new value.
-     */
-    public void setLength(int value) {
-        handle.getSpecificModifier(PublicKey.class).write(0, (PublicKey) value);
-    }
+    /* public int getLength() {
+        return handle.getSpecificModifier(PublicKey.class).read(0);
+    } */
     
     /**
      * Retrieve Public Key.

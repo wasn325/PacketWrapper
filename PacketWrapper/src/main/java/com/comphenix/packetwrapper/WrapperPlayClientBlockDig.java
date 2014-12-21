@@ -2,6 +2,8 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.BlockPosition;
+import com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType;
 
 public class WrapperPlayClientBlockDig extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Client.BLOCK_DIG;
@@ -21,16 +23,16 @@ public class WrapperPlayClientBlockDig extends AbstractPacket {
      * Notes: the action the player is taking against the block (see below)
      * @return The current Status
      */
-    public byte getStatus() {
-        return (byte) handle.getSpecificModifier(Enum.class).read(0);
+    public PlayerDigType getStatus() {
+        return handle.getPlayerDigTypes().read(0);
     }
     
     /**
      * Set Status.
      * @param value - new value.
      */
-    public void setStatus(byte value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setStatus(PlayerDigType value) {
+        handle.getPlayerDigTypes().write(0, value);
     }
     
     /**
@@ -40,7 +42,7 @@ public class WrapperPlayClientBlockDig extends AbstractPacket {
      * @return The current Location
      */
     public BlockPosition getLocation() {
-        return handle.getBlockPositions().read(0);
+        return handle.getBlockPositionModifier().read(0);
     }
     
     /**
@@ -48,26 +50,25 @@ public class WrapperPlayClientBlockDig extends AbstractPacket {
      * @param value - new value.
      */
     public void setLocation(BlockPosition value) {
-        handle.getBlockPositions().write(0, value);
+        handle.getBlockPositionModifier().write(0, value);
     }
-    
+
     /**
      * Retrieve Face.
      * <p>
      * Notes: the face being hit (see below)
      * @return The current Face
      */
-    public byte getFace() {
+    /* public byte getFace() {
         return (byte) handle.getSpecificModifier(Enum.class).read(0);
-    }
+    } */
     
     /**
      * Set Face.
      * @param value - new value.
      */
-    public void setFace(byte value) {
+    /* public void setFace(byte value) {
         handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
-    }
-    
+    } */
+   
 }
-

@@ -1,5 +1,7 @@
 package com.comphenix.packetwrapper;
 
+import java.util.UUID;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 

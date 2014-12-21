@@ -1,7 +1,10 @@
 package com.comphenix.packetwrapper;
 
+import java.util.UUID;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 
 public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.NAMED_ENTITY_SPAWN;

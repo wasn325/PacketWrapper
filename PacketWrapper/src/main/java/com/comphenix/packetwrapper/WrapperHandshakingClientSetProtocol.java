@@ -1,10 +1,11 @@
 package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.PacketType.Protocol;
 import com.comphenix.protocol.events.PacketContainer;
 
 public class WrapperHandshakingClientSetProtocol extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Handshaking.Client.SET_PROTOCOL;
+    public static final PacketType TYPE = PacketType.Handshake.Client.SET_PROTOCOL;
     
     public WrapperHandshakingClientSetProtocol() {
         super(new PacketContainer(TYPE), TYPE);
@@ -57,16 +58,16 @@ public class WrapperHandshakingClientSetProtocol extends AbstractPacket {
      * Notes: 25565
      * @return The current Server Port
      */
-    public short getServerPort() {
-        return (short) handle.getIntegers().read(1);
+    public int getServerPort() {
+        return handle.getIntegers().read(1);
     }
     
     /**
      * Set Server Port.
      * @param value - new value.
      */
-    public void setServerPort(short value) {
-        handle.getIntegers().write(1, (int) value);
+    public void setServerPort(int value) {
+        handle.getIntegers().write(1, value);
     }
     
     /**
@@ -75,16 +76,16 @@ public class WrapperHandshakingClientSetProtocol extends AbstractPacket {
      * Notes: 1 for status, 2 for login
      * @return The current Next state
      */
-    public int getNextState() {
-        return (int) handle.getSpecificModifier(Enum.class).read(0);
+    public Protocol getNextState() {
+        return handle.getProtocols().read(0);
     }
     
     /**
      * Set Next state.
      * @param value - new value.
      */
-    public void setNextState(int value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setNextState(Protocol value) {
+        handle.getProtocols().write(0, value);
     }
     
 }

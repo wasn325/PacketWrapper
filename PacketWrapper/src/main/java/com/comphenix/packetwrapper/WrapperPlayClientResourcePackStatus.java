@@ -2,6 +2,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers.ResourcePackStatus;
 
 public class WrapperPlayClientResourcePackStatus extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Client.RESOURCE_PACK_STATUS;
@@ -39,16 +40,16 @@ public class WrapperPlayClientResourcePackStatus extends AbstractPacket {
      * Notes: successfully loaded: 0, Declined: 1, Failed download: 2, Accepted: 3
      * @return The current Result
      */
-    public int getResult() {
-        return (int) handle.getSpecificModifier(Enum.class).read(0);
+    public ResourcePackStatus getResult() {
+        return handle.getResourcePackStatus().read(0);
     }
     
     /**
      * Set Result.
      * @param value - new value.
      */
-    public void setResult(int value) {
-        handle.getSpecificModifier(Enum.class).write(0, (Enum<?>) value);
+    public void setResult(ResourcePackStatus value) {
+        handle.getResourcePackStatus().write(0, value);
     }
     
 }

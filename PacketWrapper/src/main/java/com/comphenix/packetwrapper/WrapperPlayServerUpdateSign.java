@@ -2,6 +2,8 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.BlockPosition;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 
 public class WrapperPlayServerUpdateSign extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.UPDATE_SIGN;
