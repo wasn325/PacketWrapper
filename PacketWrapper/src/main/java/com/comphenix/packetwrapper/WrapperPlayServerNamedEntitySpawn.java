@@ -2,22 +2,24 @@ package com.comphenix.packetwrapper;
 
 import java.util.UUID;
 
+import org.bukkit.util.Vector;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 
 public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.NAMED_ENTITY_SPAWN;
-    
+
     public WrapperPlayServerNamedEntitySpawn() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
-    
+
     public WrapperPlayServerNamedEntitySpawn(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
+
     /**
      * Retrieve Entity ID.
      * <p>
@@ -27,7 +29,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public int getEntityId() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
      * Set Entity ID.
      * @param value - new value.
@@ -35,7 +37,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public void setEntityId(int value) {
         handle.getIntegers().write(0, value);
     }
-    
+
     /**
      * Retrieve Player UUID.
      * <p>
@@ -45,7 +47,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public UUID getPlayerUuid() {
         return handle.getSpecificModifier(UUID.class).read(0);
     }
-    
+
     /**
      * Set Player UUID.
      * @param value - new value.
@@ -53,97 +55,111 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public void setPlayerUuid(UUID value) {
         handle.getSpecificModifier(UUID.class).write(0, value);
     }
-    
+
     /**
-     * Retrieve X.
+     * Retrieve the position of the spawned entity as a vector.
+     * @return The position as a vector.
+     */
+    public Vector getPosition() {
+        return new Vector(getX(), getY(), getZ());
+    }
+
+    /**
+     * Set the position of the spawned entity using a vector.
+     * @param position - the new position.
+     */
+    public void setPosition(Vector position) {
+        setX(position.getX());
+        setY(position.getY());
+        setZ(position.getZ());
+    }
+
+    /**
+     * Retrieve the x axis of the position.
      * <p>
-     * Notes: player X as a Fixed-Point number
+     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
      * @return The current X
-     */
-    public int getX() {
-        return handle.getIntegers().read(1);
+    */
+    public double getX() {
+        return handle.getIntegers().read(1) / 32.0D;
     }
-    
+
     /**
-     * Set X.
+     * Set the x axis of the position.
      * @param value - new value.
-     */
-    public void setX(int value) {
-        handle.getIntegers().write(1, value);
+    */
+    public void setX(double value) {
+        handle.getIntegers().write(1, (int) Math.floor(value * 32.0D));
     }
-    
+
     /**
-     * Retrieve Y.
+     * Retrieve the y axis of the position.
      * <p>
-     * Notes: player X as a Fixed-Point number
-     * @return The current Y
-     */
-    public int getY() {
-        return handle.getIntegers().read(2);
+     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
+     * @return The current y
+    */
+    public double getY() {
+        return handle.getIntegers().read(2) / 32.0D;
     }
-    
+
     /**
-     * Set Y.
+     * Set the y axis of the position.
      * @param value - new value.
-     */
-    public void setY(int value) {
-        handle.getIntegers().write(2, value);
+    */
+    public void setY(double value) {
+        handle.getIntegers().write(2, (int) Math.floor(value * 32.0D));
     }
-    
+
     /**
-     * Retrieve Z.
+     * Retrieve the z axis of the new position.
      * <p>
-     * Notes: player X as a Fixed-Point number
-     * @return The current Z
-     */
-    public int getZ() {
-        return handle.getIntegers().read(3);
+     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
+     * @return The current z
+    */
+    public double getZ() {
+        return handle.getIntegers().read(3) / 32.0D;
     }
-    
+
     /**
-     * Set Z.
+     * Set the z axis of the new position.
      * @param value - new value.
-     */
-    public void setZ(int value) {
-        handle.getIntegers().write(3, value);
+    */
+    public void setZ(double value) {
+        handle.getIntegers().write(3, (int) Math.floor(value * 32.0D));
     }
-    
+
     /**
-     * Retrieve Yaw.
-     * <p>
-     * Notes: player rotation as a packed byte
+     * Retrieve the yaw of the spawned entity.
      * @return The current Yaw
-     */
-    public byte getYaw() {
-        return handle.getBytes().read(0);
+    */
+    public float getYaw() {
+        return (handle.getBytes().read(0) * 360.F) / 256.0F;
     }
-    
+
     /**
-     * Set Yaw.
-     * @param value - new value.
-     */
-    public void setYaw(byte value) {
-        handle.getBytes().write(0, value);
+     * Set the yaw of the spawned entity.
+     * @param value - new yaw.
+    */
+    public void setYaw(float value) {
+        handle.getBytes().write(0, (byte) (value * 256.0F / 360.0F));
     }
-    
+
     /**
-     * Retrieve Pitch.
-     * <p>
-     * Notes: player rotation as a packet byte
-     * @return The current Pitch
-     */
-    public byte getPitch() {
-        return handle.getBytes().read(1);
+     * Retrieve the pitch of the spawned entity.
+     * @return The current pitch
+    */
+    public float getPitch() {
+        return (handle.getBytes().read(1) * 360.F) / 256.0F;
     }
-    
+
     /**
-     * Set Pitch.
-     * @param value - new value.
-     */
-    public void setPitch(byte value) {
-        handle.getBytes().write(1, value);
+     * Set the pitch of the spawned entity.
+     * @param value - new pitch.
+    */
+    public void setPitch(float value) {
+        handle.getBytes().write(1, (byte) (value * 256.0F / 360.0F));
     }
-    
+
     /**
      * Retrieve Current Item.
      * <p>
@@ -153,7 +169,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public int getCurrentItem() {
         return handle.getIntegers().read(4);
     }
-    
+
     /**
      * Set Current Item.
      * @param value - new value.
@@ -161,7 +177,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public void setCurrentItem(int value) {
         handle.getIntegers().write(4, value);
     }
-    
+
     /**
      * Retrieve Metadata.
      * <p>
@@ -171,7 +187,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public WrappedDataWatcher getMetadata() {
         return handle.getDataWatcherModifier().read(0);
     }
-    
+
     /**
      * Set Metadata.
      * @param value - new value.
@@ -179,6 +195,5 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public void setMetadata(WrappedDataWatcher value) {
         handle.getDataWatcherModifier().write(0, value);
     }
-    
-}
 
+}
