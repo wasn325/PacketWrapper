@@ -3,3 +3,5 @@ main: com.comphenix.packetwrapper.PacketWrapper
 
 description: Contains wrappers for each packet in Minecraft.
 version: 1.6.1-R0.1
+
+depend: [ProtocolLib]
