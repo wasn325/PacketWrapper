@@ -36,25 +36,23 @@ public class WrapperPlayServerUpdateSign extends AbstractPacket {
     }
     
     /**
-     * Retrieve Line 1.
-     * <p>
-     * Notes: first line of text in the sign
-     * @return The current Line 1
+     * Retrieve this sign's lines of text represented by a chat component array.
+     * @return The current lines
      */
-    public WrappedChatComponent[] getLine1() {
+    public WrappedChatComponent[] getLines() {
         return handle.getChatComponentArrays().read(0);
     }
     
     /**
-     * Set Line 1.
-     * @param value - new value.
+     * Set this sign's lines of text.
+     * @param value - Lines, must be 4 elements long
      */
-    public void setLine1(WrappedChatComponent[] value) {
+    public void setLines(WrappedChatComponent[] value) {
+        if (value == null)
+            throw new IllegalArgumentException("value cannot be null!");
+        if (value.length != 4)
+            throw new IllegalArgumentException("value must have 4 elements!");
+
         handle.getChatComponentArrays().write(0, value);
     }
-    
-    // Cannot generate field Line 2
-    // Cannot generate field Line 3
-    // Cannot generate field Line 4
 }
-
