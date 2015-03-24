@@ -176,7 +176,7 @@ public class BlockChangeArray {
 		}
 		
 		private int getValue(int rightShift, int updateMask) {
-			return (data[index] & updateMask) >> rightShift;
+			return (data[index] & updateMask) >>> rightShift;
 		}
 	}
 	
