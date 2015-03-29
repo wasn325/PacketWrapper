@@ -35,21 +35,37 @@ public class WrapperPlayServerChat extends AbstractPacket {
     }
     
     /**
-     * Retrieve JSON Data.
+     * Retrieve the chat message.
      * <p>
-     * Notes: chat , Limited to 32767 bytes
-     * @return The current JSON Data
+     * Limited to 32767 bytes
+     * @return The current message
      */
-    public WrappedChatComponent getJsonData() {
+    public WrappedChatComponent getMessage() {
         return handle.getChatComponents().read(0);
+    }
+
+    /**
+     * @deprecated Renamed to {@link #getMessage()}
+     */
+    @Deprecated
+    public WrappedChatComponent getJsonData() {
+        return getMessage();
     }
     
     /**
-     * Set JSON Data.
+     * Set the message.
      * @param value - new value.
      */
-    public void setJsonData(WrappedChatComponent value) {
+    public void setMessage(WrappedChatComponent value) {
         handle.getChatComponents().write(0, value);
+    }
+
+    /**
+     * @deprecated Renamed to {@link #setMessage(WrappedChatComponent)}
+     */
+    @Deprecated
+    public void setJsonData(WrappedChatComponent value) {
+        setMessage(value);
     }
     
     /**
