@@ -43,7 +43,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
      * Notes: the player's Entity ID
      * @return The current Entity ID
      */
-    public int getEntityId() {
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
     

@@ -112,7 +112,7 @@ public class WrapperPlayServerOpenWindow extends AbstractPacket {
      * Notes: entityHorse's entityId. Only sent when window type is equal to "EntityHorse".
      * @return The current Entity ID
      */
-    public int getEntityId() {
+    public int getEntityID() {
         return handle.getIntegers().read(2);
     }
     

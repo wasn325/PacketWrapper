@@ -39,7 +39,7 @@ public class WrapperPlayServerAnimation extends AbstractPacket {
      * Notes: player ID
      * @return The current Entity ID
      */
-    public int getEntityId() {
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
     

@@ -35,10 +35,10 @@ public class WrapperLoginClientStart extends AbstractPacket {
     }
     
     /**
-     * Retrieve Name.
-     * @return The current Name
+     * Retrieve Profile.
+     * @return The current Profile
      */
-    public WrappedGameProfile getName() {
+    public WrappedGameProfile getProfile() {
         return handle.getGameProfiles().read(0);
     }
     
@@ -46,9 +46,7 @@ public class WrapperLoginClientStart extends AbstractPacket {
      * Set Name.
      * @param value - new value.
      */
-    public void setName(WrappedGameProfile value) {
+    public void setProfile(WrappedGameProfile value) {
         handle.getGameProfiles().write(0, value);
     }
-    
 }
-

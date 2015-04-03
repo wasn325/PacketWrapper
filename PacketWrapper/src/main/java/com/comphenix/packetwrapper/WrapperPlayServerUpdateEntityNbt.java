@@ -38,7 +38,7 @@ public class WrapperPlayServerUpdateEntityNbt extends AbstractPacket {
      * Retrieve Entity ID.
      * @return The current Entity ID
      */
-    public int getEntityId() {
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
     

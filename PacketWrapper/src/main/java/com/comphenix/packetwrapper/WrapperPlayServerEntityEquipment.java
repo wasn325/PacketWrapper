@@ -41,7 +41,7 @@ public class WrapperPlayServerEntityEquipment extends AbstractPacket {
      * Notes: entity's ID
      * @return The current EntityID
      */
-    public int getEntityid() {
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
     

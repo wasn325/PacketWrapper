@@ -18,6 +18,8 @@
  */
 package com.comphenix.packetwrapper;
 
+import java.security.PublicKey;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
@@ -50,34 +52,36 @@ public class WrapperLoginServerEncryptionBegin extends AbstractPacket {
     public void setServerId(String value) {
         handle.getStrings().write(0, value);
     }
-    
-    /**
-     * Retrieve Length.
-     * <p>
-     * Notes: length of public key
-     * @return The current Length
-     */
-    /* public int getLength() {
-        return handle.getSpecificModifier(PublicKey.class).read(0);
-    } */
-    
+
     /**
      * Retrieve Public Key.
      * @return The current Public Key
      */
-    public byte[] getPublicKey() {
-        return handle.getByteArrays().read(0);
+    public PublicKey getPublicKey() {
+        return handle.getSpecificModifier(PublicKey.class).read(0);
     }
     
     /**
      * Set Public Key.
      * @param value - new value.
      */
-    public void setPublicKey(byte[] value) {
+    public void setPublicKey(PublicKey value) {
+        handle.getSpecificModifier(PublicKey.class).write(0, value);
+    }
+
+    /**
+     * Retrieve Verify Token.
+     * @return The current Verify Token
+     */
+    public byte[] getVerifyToken() {
+        return handle.getByteArrays().read(0);
+    }
+
+    /**
+     * Set Verify Token.
+     * @param value - new value.
+     */
+    public void setVerifyToken(byte[] value) {
         handle.getByteArrays().write(0, value);
     }
-    
-    // Cannot generate field Length
-    // Cannot generate field Verify Token
 }
-

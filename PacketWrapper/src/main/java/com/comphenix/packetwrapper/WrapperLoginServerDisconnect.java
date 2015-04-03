@@ -35,20 +35,28 @@ public class WrapperLoginServerDisconnect extends AbstractPacket {
     }
     
     /**
-     * Retrieve JSON Data.
-     * @return The current JSON Data
+     * Retrieve reason.
+     * @return The current reason
      */
-    public WrappedChatComponent getJsonData() {
+    public WrappedChatComponent getReason() {
         return handle.getChatComponents().read(0);
+    }
+
+    @Deprecated
+    public WrappedChatComponent getJsonData() {
+        return getReason();
     }
     
     /**
-     * Set JSON Data.
+     * Set reason.
      * @param value - new value.
      */
-    public void setJsonData(WrappedChatComponent value) {
+    public void setReason(WrappedChatComponent value) {
         handle.getChatComponents().write(0, value);
     }
-    
-}
 
+    @Deprecated
+    public void setJsonData(WrappedChatComponent value) {
+        setReason(value);
+    }
+}

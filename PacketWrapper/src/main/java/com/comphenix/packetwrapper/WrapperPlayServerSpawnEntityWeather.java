@@ -39,7 +39,7 @@ public class WrapperPlayServerSpawnEntityWeather extends AbstractPacket {
      * Notes: the entity ID of the thunderbolt
      * @return The current Entity ID
      */
-    public int getEntityId() {
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
     

@@ -49,7 +49,7 @@ public class WrapperPlayServerEntityDestroy extends AbstractPacket {
      * Notes: the list of entities of destroy
      * @return The current Entity IDs
      */
-    public int[] getEntityIds() {
+    public int[] getEntityIDs() {
         return handle.getIntegerArrays().read(0);
     }
     

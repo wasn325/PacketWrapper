@@ -32,7 +32,4 @@ public class WrapperPlayClientArmAnimation extends AbstractPacket {
     public WrapperPlayClientArmAnimation(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
-    // Cannot generate field null
 }
-
