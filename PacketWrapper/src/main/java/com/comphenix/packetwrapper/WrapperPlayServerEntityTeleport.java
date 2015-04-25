@@ -18,8 +18,12 @@
  */
 package com.comphenix.packetwrapper;
 
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 
 public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.ENTITY_TELEPORT;
@@ -34,128 +38,123 @@ public class WrapperPlayServerEntityTeleport extends AbstractPacket {
     }
     
     /**
-     * Retrieve Entity ID.
-     * <p>
-     * Notes: entity's ID
-     * @return The current Entity ID
-     */
+     * Retrieve entity ID.
+     * @return The current EID
+    */
     public int getEntityID() {
         return handle.getIntegers().read(0);
     }
     
     /**
-     * Set Entity ID.
+     * Set entity ID.
      * @param value - new value.
-     */
-    public void setEntityId(int value) {
+    */
+    public void setEntityID(int value) {
         handle.getIntegers().write(0, value);
     }
     
     /**
-     * Retrieve X.
+     * Retrieve the entity.
+     * @param world - the current world of the entity.
+     * @return The entity.
+     */
+    public Entity getEntity(World world) {
+    	return handle.getEntityModifier(world).read(0);
+    }
+
+    /**
+     * Retrieve the entity.
+     * @param event - the packet event.
+     * @return The entity.
+     */
+    public Entity getEntity(PacketEvent event) {
+    	return getEntity(event.getPlayer().getWorld());
+    }
+    
+    /**
+     * Retrieve the x axis of the new position.
      * <p>
-     * Notes: x position as a Fixed-Point number
+     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
      * @return The current X
-     */
-    public int getX() {
-        return handle.getIntegers().read(1);
+    */
+    public double getX() {
+        return handle.getIntegers().read(1) / 32.0D;
     }
     
     /**
-     * Set X.
+     * Set the x axis of the new position.
      * @param value - new value.
-     */
-    public void setX(int value) {
-        handle.getIntegers().write(1, value);
+    */
+    public void setX(double value) {
+        handle.getIntegers().write(1, (int) Math.floor(value * 32.0D));
     }
     
     /**
-     * Retrieve Y.
+     * Retrieve the y axis of the new position.
      * <p>
-     * Notes: y position as a Fixed-Point number
-     * @return The current Y
-     */
-    public int getY() {
-        return handle.getIntegers().read(2);
+     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
+     * @return The current y
+    */
+    public double getY() {
+        return handle.getIntegers().read(2) / 32.0D;
     }
     
     /**
-     * Set Y.
+     * Set the y axis of the new position.
      * @param value - new value.
-     */
-    public void setY(int value) {
-        handle.getIntegers().write(2, value);
+    */
+    public void setY(double value) {
+        handle.getIntegers().write(2, (int) Math.floor(value * 32.0D));
     }
     
     /**
-     * Retrieve Z.
+     * Retrieve the z axis of the new position.
      * <p>
-     * Notes: z position as a Fixed-Point number
-     * @return The current Z
-     */
-    public int getZ() {
-        return handle.getIntegers().read(3);
+     * Note that the coordinate is rounded off to the nearest 1/32 of a meter.
+     * @return The current z
+    */
+    public double getZ() {
+        return handle.getIntegers().read(3) / 32.0D;
     }
     
     /**
-     * Set Z.
+     * Set the z axis of the new position.
      * @param value - new value.
-     */
-    public void setZ(int value) {
-        handle.getIntegers().write(3, value);
+    */
+    public void setZ(double value) {
+        handle.getIntegers().write(3, (int) Math.floor(value * 32.0D));
     }
     
     /**
-     * Retrieve Yaw.
-     * <p>
-     * Notes: the X Axis rotation as a fraction of 360
+     * Retrieve the yaw of the current entity.
      * @return The current Yaw
-     */
-    public byte getYaw() {
-        return handle.getBytes().read(0);
+    */
+    public float getYaw() {
+        return (handle.getBytes().read(0) * 360.F) / 256.0F;
     }
     
     /**
-     * Set Yaw.
-     * @param value - new value.
-     */
-    public void setYaw(byte value) {
-        handle.getBytes().write(0, value);
+     * Set the yaw of the current entity.
+     * @param value - new yaw.
+    */
+    public void setYaw(float value) {
+        handle.getBytes().write(0, (byte) (value * 256.0F / 360.0F));
     }
     
     /**
-     * Retrieve Pitch.
-     * <p>
-     * Notes: the Y Axis rotation as a fraction of 360
-     * @return The current Pitch
-     */
-    public byte getPitch() {
-        return handle.getBytes().read(1);
+     * Retrieve the pitch of the current entity.
+     * @return The current pitch
+    */
+    public float getPitch() {
+        return (handle.getBytes().read(1) * 360.F) / 256.0F;
     }
     
     /**
-     * Set Pitch.
-     * @param value - new value.
-     */
-    public void setPitch(byte value) {
-        handle.getBytes().write(1, value);
+     * Set the pitch of the current entity.
+     * @param value - new pitch.
+    */
+    public void setPitch(float value) {
+        handle.getBytes().write(1, (byte) (value * 256.0F / 360.0F));
     }
-    
-    /**
-     * Retrieve On Ground.
-     * @return The current On Ground
-     */
-    public boolean getOnGround() {
-        return handle.getSpecificModifier(boolean.class).read(0);
-    }
-    
-    /**
-     * Set On Ground.
-     * @param value - new value.
-     */
-    public void setOnGround(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, value);
-    }
-    
 }
 
