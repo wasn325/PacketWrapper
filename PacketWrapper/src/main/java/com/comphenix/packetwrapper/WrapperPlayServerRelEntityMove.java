@@ -53,56 +53,50 @@ public class WrapperPlayServerRelEntityMove extends AbstractPacket {
     
     /**
      * Retrieve DX.
-     * <p>
-     * Notes: change in X position as a Fixed-Point number
      * @return The current DX
      */
-    public byte getDx() {
-        return handle.getBytes().read(0);
+    public double getDx() {
+        return handle.getBytes().read(0) / 32D;
     }
     
     /**
      * Set DX.
      * @param value - new value.
      */
-    public void setDx(byte value) {
-        handle.getBytes().write(0, value);
+    public void setDx(double value) {
+        handle.getBytes().write(0,  (byte)(value * 32));
     }
     
     /**
      * Retrieve DY.
-     * <p>
-     * Notes: change in Y position as a Fixed-Point number
      * @return The current DY
      */
-    public byte getDy() {
-        return handle.getBytes().read(0);
+    public double getDy() {
+        return handle.getBytes().read(1) / 32D;
     }
     
     /**
      * Set DY.
      * @param value - new value.
      */
-    public void setDy(byte value) {
-        handle.getBytes().write(0, value);
+    public void setDy(double value) {
+        handle.getBytes().write(1,  (byte)(value * 32));
     }
     
     /**
      * Retrieve DZ.
-     * <p>
-     * Notes: change in Z position as a Fixed-Point number
      * @return The current DZ
      */
-    public byte getDz() {
-        return handle.getBytes().read(0);
+    public double getDz() {
+        return handle.getBytes().read(2) / 32D;
     }
     
     /**
      * Set DZ.
      * @param value - new value.
      */
-    public void setDz(byte value) {
-        handle.getBytes().write(0, value);
+    public void setDz(double value) {
+        handle.getBytes().write(2,  (byte)(value * 32));
     }
     
     /**

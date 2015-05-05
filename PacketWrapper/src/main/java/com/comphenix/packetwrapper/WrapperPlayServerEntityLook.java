@@ -51,40 +51,37 @@ public class WrapperPlayServerEntityLook extends AbstractPacket {
         handle.getIntegers().write(0, value);
     }
     
+
     /**
-     * Retrieve Yaw.
-     * <p>
-     * Notes: the X Axis rotation as a fraction of 360
+     * Retrieve the yaw of the current entity.
      * @return The current Yaw
-     */
-    public byte getYaw() {
-        return handle.getBytes().read(0);
+    */
+    public float getYaw() {
+        return (handle.getBytes().read(0) * 360.F) / 256.0F;
     }
     
     /**
-     * Set Yaw.
-     * @param value - new value.
-     */
-    public void setYaw(byte value) {
-        handle.getBytes().write(0, value);
+     * Set the yaw of the current entity.
+     * @param value - new yaw.
+    */
+    public void setYaw(float value) {
+        handle.getBytes().write(0, (byte) (value * 256.0F / 360.0F));
     }
     
     /**
-     * Retrieve Pitch.
-     * <p>
-     * Notes: the Y Axis rotation as a fraction of 360
-     * @return The current Pitch
-     */
-    public byte getPitch() {
-        return handle.getBytes().read(0);
+     * Retrieve the pitch of the current entity.
+     * @return The current pitch
+    */
+    public float getPitch() {
+        return (handle.getBytes().read(1) * 360.F) / 256.0F;
     }
     
     /**
-     * Set Pitch.
-     * @param value - new value.
-     */
-    public void setPitch(byte value) {
-        handle.getBytes().write(0, value);
+     * Set the pitch of the current entity.
+     * @param value - new pitch.
+    */
+    public void setPitch(float value) {
+        handle.getBytes().write(1, (byte) (value * 256.0F / 360.0F));
     }
     
     /**

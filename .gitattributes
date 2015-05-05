@@ -1,0 +1,3 @@
+*.java  eol=crlf
+*.yml   eol=crlf
+*.xml   eol=crlf

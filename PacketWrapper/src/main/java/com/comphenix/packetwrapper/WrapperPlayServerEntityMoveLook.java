@@ -53,92 +53,83 @@ public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
     
     /**
      * Retrieve DX.
-     * <p>
-     * Notes: change in X position as a Fixed-Point number
      * @return The current DX
      */
-    public byte getDx() {
-        return handle.getBytes().read(0);
+    public double getDx() {
+        return handle.getBytes().read(0) / 32D;
     }
     
     /**
      * Set DX.
      * @param value - new value.
      */
-    public void setDx(byte value) {
-        handle.getBytes().write(0, value);
+    public void setDx(double value) {
+        handle.getBytes().write(0,  (byte)(value * 32));
     }
     
     /**
      * Retrieve DY.
-     * <p>
-     * Notes: change in Y position as a Fixed-Point number
      * @return The current DY
      */
-    public byte getDy() {
-        return handle.getBytes().read(0);
+    public double getDy() {
+        return handle.getBytes().read(0) / 32D;
     }
     
     /**
      * Set DY.
      * @param value - new value.
      */
-    public void setDy(byte value) {
-        handle.getBytes().write(0, value);
+    public void setDy(double value) {
+        handle.getBytes().write(0,  (byte)(value * 32));
     }
     
     /**
      * Retrieve DZ.
-     * <p>
-     * Notes: change in Z position as a Fixed-Point number
      * @return The current DZ
      */
-    public byte getDz() {
-        return handle.getBytes().read(0);
+    public double getDz() {
+        return handle.getBytes().read(0) / 32D;
     }
     
     /**
      * Set DZ.
      * @param value - new value.
      */
-    public void setDz(byte value) {
-        handle.getBytes().write(0, value);
+    public void setDz(double value) {
+        handle.getBytes().write(0,  (byte)(value * 32));
     }
     
+
     /**
-     * Retrieve Yaw.
-     * <p>
-     * Notes: the X Axis rotation as a fraction of 360
+     * Retrieve the yaw of the current entity.
      * @return The current Yaw
-     */
-    public byte getYaw() {
-        return handle.getBytes().read(0);
+    */
+    public float getYaw() {
+        return (handle.getBytes().read(0) * 360.F) / 256.0F;
     }
     
     /**
-     * Set Yaw.
-     * @param value - new value.
-     */
-    public void setYaw(byte value) {
-        handle.getBytes().write(0, value);
+     * Set the yaw of the current entity.
+     * @param value - new yaw.
+    */
+    public void setYaw(float value) {
+        handle.getBytes().write(0, (byte) (value * 256.0F / 360.0F));
     }
     
     /**
-     * Retrieve Pitch.
-     * <p>
-     * Notes: the Y Axis rotation as a fraction of 360
-     * @return The current Pitch
-     */
-    public byte getPitch() {
-        return handle.getBytes().read(0);
+     * Retrieve the pitch of the current entity.
+     * @return The current pitch
+    */
+    public float getPitch() {
+        return (handle.getBytes().read(1) * 360.F) / 256.0F;
     }
     
     /**
-     * Set Pitch.
-     * @param value - new value.
-     */
-    public void setPitch(byte value) {
-        handle.getBytes().write(0, value);
+     * Set the pitch of the current entity.
+     * @param value - new pitch.
+    */
+    public void setPitch(float value) {
+        handle.getBytes().write(1, (byte) (value * 256.0F / 360.0F));
     }
     
     /**
