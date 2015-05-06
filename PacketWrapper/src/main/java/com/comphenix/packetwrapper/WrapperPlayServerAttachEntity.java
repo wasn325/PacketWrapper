@@ -74,7 +74,7 @@ public class WrapperPlayServerAttachEntity extends AbstractPacket {
      * @return The current Leash
      */
     public boolean getLeash() {
-    	return handle.getIntegers().read(0) != 0;
+        return handle.getIntegers().read(0) != 0;
     }
     
     /**
@@ -82,8 +82,6 @@ public class WrapperPlayServerAttachEntity extends AbstractPacket {
      * @param value - new value.
      */
     public void setLeash(boolean value) {
-    	handle.getIntegers().write(0, value ? 1 : 0);
+        handle.getIntegers().write(0, value ? 1 : 0);
     }
-    
 }
-

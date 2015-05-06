@@ -50,7 +50,6 @@ public class WrapperPlayServerEntityLook extends AbstractPacket {
     public void setEntityId(int value) {
         handle.getIntegers().write(0, value);
     }
-    
 
     /**
      * Retrieve the yaw of the current entity.
@@ -71,7 +70,7 @@ public class WrapperPlayServerEntityLook extends AbstractPacket {
     /**
      * Retrieve the pitch of the current entity.
      * @return The current pitch
-    */
+     */
     public float getPitch() {
         return (handle.getBytes().read(1) * 360.F) / 256.0F;
     }
@@ -99,6 +98,4 @@ public class WrapperPlayServerEntityLook extends AbstractPacket {
     public void setOnGround(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, value);
     }
-    
 }
-

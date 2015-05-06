@@ -64,7 +64,7 @@ public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
      * @param value - new value.
      */
     public void setDx(double value) {
-        handle.getBytes().write(0,  (byte)(value * 32));
+        handle.getBytes().write(0, (byte) (value * 32));
     }
     
     /**
@@ -80,7 +80,7 @@ public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
      * @param value - new value.
      */
     public void setDy(double value) {
-        handle.getBytes().write(0,  (byte)(value * 32));
+        handle.getBytes().write(0, (byte) (value * 32));
     }
     
     /**
@@ -96,9 +96,8 @@ public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
      * @param value - new value.
      */
     public void setDz(double value) {
-        handle.getBytes().write(0,  (byte)(value * 32));
+        handle.getBytes().write(0, (byte) (value * 32));
     }
-    
 
     /**
      * Retrieve the yaw of the current entity.
@@ -147,6 +146,4 @@ public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
     public void setOnGround(boolean value) {
         handle.getSpecificModifier(boolean.class).write(0, value);
     }
-    
 }
-
