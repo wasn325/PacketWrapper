@@ -21,6 +21,9 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
 public class WrapperPlayServerCustomPayload extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.CUSTOM_PAYLOAD;
     
@@ -51,6 +54,40 @@ public class WrapperPlayServerCustomPayload extends AbstractPacket {
         handle.getStrings().write(0, value);
     }
     
-    // Cannot find type for b
+    /**
+     * Retrieve payload contents as a raw Netty buffer
+     * 
+     * @return Payload contents as a Netty buffer
+     */
+    public ByteBuf getContentsBuffer() {
+        return (ByteBuf) handle.getModifier().withType(ByteBuf.class).read(0);
+    }
+    
+    /**
+     * Retrieve payload contents
+     * 
+     * @return Payload contents as a byte array
+     */
+    public byte[] getContents() {
+        return getContentsBuffer().array();
+    }
+    
+    /**
+     * Update payload contents with a Netty buffer
+     * 
+     * @param content - new payload content
+     */
+    public void setContentsBuffer(ByteBuf contents) {
+        handle.getModifier().withType(ByteBuf.class).write(0, contents);
+    }
+    
+    /**
+     * Update payload contents with a byte array
+     * 
+     * @param content - new payload content
+     */
+    public void setContents(byte[] content) {
+        setContentsBuffer(Unpooled.copiedBuffer(content));
+    }
 }
 
