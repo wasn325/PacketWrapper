@@ -201,14 +201,14 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
     }
 
     /**
-     * Retrieve pack option data. Pack data is calculated as follows.
+     * Retrieve pack option data. Pack data is calculated as follows:
      * <pre><code>
      * int data = 0;
      * if (team.allowFriendlyFire()) {
-     *     i |= 1;
+     *     data |= 1;
      * }
      * if (team.canSeeFriendlyInvisibles()) {
-     *     i |= 2;
+     *     data |= 2;
      * }
      * </code></pre>
      * @return The current pack option data
