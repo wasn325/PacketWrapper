@@ -20,6 +20,8 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.reflect.IntEnum;
+import com.comphenix.protocol.reflect.StructureModifier;
 
 public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.SCOREBOARD_OBJECTIVE;
@@ -32,6 +34,22 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
     public WrapperPlayServerScoreboardObjective(PacketContainer packet) {
         super(packet, TYPE);
     }
+
+    /**
+     * Enum containing all known packet modes.
+     * @author dmulloy2
+     */
+    public static class Mode extends IntEnum {
+        public static final int ADD_OBJECTIVE = 0;
+        public static final int REMOVE_OBJECTIVE = 1;
+        public static final int UPDATE_VALUE = 2;
+
+        private static final Mode INSTANCE = new Mode();
+
+        public static Mode getInstance() {
+            return INSTANCE;
+        }
+    }
     
     /**
      * Retrieve Objective name.
@@ -39,7 +57,7 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
      * Notes: an unique name for the objective
      * @return The current Objective name
      */
-    public String getObjectiveName() {
+    public String getName() {
         return handle.getStrings().read(0);
     }
     
@@ -47,10 +65,50 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
      * Set Objective name.
      * @param value - new value.
      */
-    public void setObjectiveName(String value) {
+    public void setName(String value) {
         handle.getStrings().write(0, value);
     }
+
+    /**
+     * Retrieve Objective value.
+     * <p>
+     * Notes: only if mode is 0 or 2. The text to be displayed for the score.
+     * @return The current Objective value
+     */
+    public String getValue() {
+        return handle.getStrings().read(1);
+    }
     
+    /**
+     * Set Objective value.
+     * @param value - new value.
+     */
+    public void setValue(String value) {
+        handle.getStrings().write(0, value);
+    }
+
+    /**
+     * Retrieve health display.
+     * <p>
+     * Notes: Can be either INTEGER or HEARTS
+     * @return
+     */
+    public String getHealthDisplay() {
+        return handle.getSpecificModifier(Enum.class).read(0).name();
+    }
+
+    /**
+     * Set health display.
+     * @param value - value
+     * @see #getHealthDisplay()
+     */
+    @SuppressWarnings("all")
+    public void setHealthDisplay(String value) {
+        StructureModifier<Enum> mod = handle.getSpecificModifier(Enum.class);
+        Enum constant = Enum.valueOf(mod.read(0).getClass(), value.toUpperCase());
+        mod.write(0, constant);
+    }
+
     /**
      * Retrieve Mode.
      * <p>
@@ -68,26 +126,4 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
     public void setMode(int value) {
         handle.getIntegers().write(0, value);
     }
-    
-    /**
-     * Retrieve Objective value.
-     * <p>
-     * Notes: only if mode is 0 or 2. The text to be displayed for the score.
-     * @return The current Objective value
-     */
-    public String getObjectiveValue() {
-        return handle.getStrings().read(0);
-    }
-    
-    /**
-     * Set Objective value.
-     * @param value - new value.
-     */
-    public void setObjectiveValue(String value) {
-        handle.getStrings().read(0);
-    }
-
-    // TODO: Type
-    
 }
-
