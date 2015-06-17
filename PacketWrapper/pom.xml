@@ -8,6 +8,10 @@
   <version>1.8-R0.1</version>
   <name>PacketWrapper</name>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <repositories>
     <repository>
       <id>spigot-repo</id>
@@ -16,6 +20,10 @@
     <repository>
       <id>dmulloy2-repo</id>
       <url>http://repo.dmulloy2.net/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>md_5-repo</id>
+      <url>http://repo.md-5.net/content/groups/public/</url>
     </repository>
   </repositories>
 
@@ -30,17 +38,16 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.8.6-R0.1-SNAPSHOT</version>
-      <type>jar</type>
-      <scope>compile</scope>
+      <version>1.8.7-R0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot</artifactId>
+      <version>1.8.7-R0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
