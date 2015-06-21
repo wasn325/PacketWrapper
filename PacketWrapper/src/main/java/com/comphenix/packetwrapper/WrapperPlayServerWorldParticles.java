@@ -51,24 +51,6 @@ public class WrapperPlayServerWorldParticles extends AbstractPacket {
     }
 
     /**
-     * Retrieve Long Distance.
-     * <p>
-     * Notes: if true, particle distance increases from 256 to 65536.
-     * @return The current Long Distance
-     */
-    public boolean getLongDistance() {
-        return handle.getSpecificModifier(boolean.class).read(0);
-    }
-
-    /**
-     * Set Long Distance.
-     * @param value - new value.
-     */
-    public void setLongDistance(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, value);
-    }
-
-    /**
      * Retrieve X.
      * <p>
      * Notes: x position of the particle
@@ -213,10 +195,29 @@ public class WrapperPlayServerWorldParticles extends AbstractPacket {
     }
 
     /**
+     * Retrieve Long Distance.
+     * <p>
+     * Notes: if true, particle distance increases from 256 to 65536.
+     * @return The current Long Distance
+     */
+    public boolean getLongDistance() {
+        return handle.getBooleans().read(0);
+    }
+
+    /**
+     * Set Long Distance.
+     * @param value - new value.
+     */
+    public void setLongDistance(boolean value) {
+        handle.getBooleans().write(0, value);
+    }
+
+    /**
      * Retrieve Data.
      * <p>
-     * Notes: length depends on particle. ICON_CRACK, BLOCK_CRACK, and BLOCK_DUST have lengths of 2, the rest have 0.
+     * Notes: length depends on particle. IRON_CRACK has a length of 2, BLOCK_CRACK and BLOCK_DUST have lengths of 1, the rest have 0.
      * @return The current Data
+     * @see Particle#getDataLength()
      */
     public int[] getData() {
         return handle.getIntegerArrays().read(0);
@@ -229,5 +230,4 @@ public class WrapperPlayServerWorldParticles extends AbstractPacket {
     public void setData(int[] value) {
         handle.getIntegerArrays().write(0, value);
     }
-
 }
