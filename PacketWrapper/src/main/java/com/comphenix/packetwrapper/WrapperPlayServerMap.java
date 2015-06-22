@@ -23,16 +23,16 @@ import com.comphenix.protocol.events.PacketContainer;
 
 public class WrapperPlayServerMap extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.MAP;
-    
+
     public WrapperPlayServerMap() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
-    
+
     public WrapperPlayServerMap(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
+
     /**
      * Retrieve Item Damage.
      * <p>
@@ -42,7 +42,7 @@ public class WrapperPlayServerMap extends AbstractPacket {
     public int getItemDamage() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
      * Set Item Damage.
      * @param value - new value.
@@ -50,7 +50,7 @@ public class WrapperPlayServerMap extends AbstractPacket {
     public void setItemDamage(int value) {
         handle.getIntegers().write(0, value);
     }
-    
+
     /**
      * Retrieve Scale.
      * @return The current Scale
@@ -58,7 +58,7 @@ public class WrapperPlayServerMap extends AbstractPacket {
     public byte getScale() {
         return handle.getBytes().read(0);
     }
-    
+
     /**
      * Set Scale.
      * @param value - new value.
@@ -66,14 +66,46 @@ public class WrapperPlayServerMap extends AbstractPacket {
     public void setScale(byte value) {
         handle.getBytes().write(0, value);
     }
-    
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
-}
 
+    // TODO maybe add support for map icons?
+
+    public int getColumns() {
+        return handle.getIntegers().read(1);
+    }
+
+    public void setColumns(int value) {
+        handle.getIntegers().write(1, value);
+    }
+
+    public int getRows() {
+        return handle.getIntegers().read(2);
+    }
+
+    public void setRows(int value) {
+        handle.getIntegers().write(2, value);
+    }
+
+    public int getX() {
+        return handle.getIntegers().read(3);
+    }
+
+    public void setX(int value) {
+        handle.getIntegers().write(3, value);
+    }
+
+    public int getZ() {
+        return handle.getIntegers().read(4);
+    }
+
+    public void setZ(int value) {
+        handle.getIntegers().write(4, value);
+    }
+
+    public byte[] getData() {
+        return handle.getByteArrays().read(0);
+    }
+
+    public void setData(byte[] value) {
+        handle.getByteArrays().write(0, value);
+    }
+}
