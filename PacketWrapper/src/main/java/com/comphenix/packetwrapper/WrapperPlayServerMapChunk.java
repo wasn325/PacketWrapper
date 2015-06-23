@@ -23,16 +23,16 @@ import com.comphenix.protocol.events.PacketContainer;
 
 public class WrapperPlayServerMapChunk extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.MAP_CHUNK;
-    
+
     public WrapperPlayServerMapChunk() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
-    
+
     public WrapperPlayServerMapChunk(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
+
     /**
      * Retrieve Chunk X.
      * <p>
@@ -42,7 +42,7 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
     public int getChunkX() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
      * Set Chunk X.
      * @param value - new value.
@@ -50,7 +50,7 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
     public void setChunkX(int value) {
         handle.getIntegers().write(0, value);
     }
-    
+
     /**
      * Retrieve Chunk Z.
      * <p>
@@ -60,7 +60,7 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
     public int getChunkZ() {
         return handle.getIntegers().read(1);
     }
-    
+
     /**
      * Set Chunk Z.
      * @param value - new value.
@@ -68,7 +68,15 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
     public void setChunkZ(int value) {
         handle.getIntegers().write(1, value);
     }
-    
+
+    public Object getChunkMap() {
+        return handle.getModifier().read(2);
+    }
+
+    public void setChunkMap(Object value) {
+        handle.getModifier().write(2, value);
+    }
+
     /**
      * Retrieve Ground-Up continuous.
      * <p>
@@ -76,19 +84,14 @@ public class WrapperPlayServerMapChunk extends AbstractPacket {
      * @return The current Ground-Up continuous
      */
     public boolean getGroundUpContinuous() {
-        return handle.getSpecificModifier(boolean.class).read(0);
+        return handle.getBooleans().read(0);
     }
-    
+
     /**
      * Set Ground-Up continuous.
      * @param value - new value.
      */
     public void setGroundUpContinuous(boolean value) {
-        handle.getSpecificModifier(boolean.class).write(0, value);
+        handle.getBooleans().write(0, value);
     }
-    
-    // Cannot find type for c
-    // Cannot find type for c
-    // Cannot find type for c
 }
-

@@ -67,7 +67,13 @@ public class WrapperPlayServerMap extends AbstractPacket {
         handle.getBytes().write(0, value);
     }
 
-    // TODO maybe add support for map icons?
+    public Object[] getMapIcons() {
+        return (Object[]) handle.getModifier().read(2);
+    }
+
+    public void setMapIcons(Object[] value) {
+        handle.getModifier().write(2, value);
+    }
 
     public int getColumns() {
         return handle.getIntegers().read(1);
