@@ -27,50 +27,52 @@ import com.comphenix.protocol.events.PacketEvent;
 
 public class WrapperPlayServerEntityVelocity extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.ENTITY_VELOCITY;
-    
+
     public WrapperPlayServerEntityVelocity() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
-    
+
     public WrapperPlayServerEntityVelocity(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
+
     /**
-     * Retrieve the entity ID.
+     * Retrieve Entity ID.
+     * <p>
+     * Notes: entity's ID
      * @return The current Entity ID
-    */
-    public int getEntityId() {
+     */
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
-     * Retrieve the entity that will have its velocity updated.
+     * Set Entity ID.
+     * @param value - new value.
+     */
+    public void setEntityID(int value) {
+        handle.getIntegers().write(0, value);
+    }
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
      * @param world - the current world of the entity.
      * @return The spawned entity.
      */
     public Entity getEntity(World world) {
-    	return handle.getEntityModifier(world).read(0);
+        return handle.getEntityModifier(world).read(0);
     }
 
     /**
-     * Retrieve the entity that will have its velocity updated.
+     * Retrieve the entity of the painting that will be spawned.
      * @param event - the packet event.
      * @return The spawned entity.
      */
     public Entity getEntity(PacketEvent event) {
-    	return getEntity(event.getPlayer().getWorld());
+        return getEntity(event.getPlayer().getWorld());
     }
-    
-    /**
-     * Set the entity ID.
-     * @param value - new value.
-    */
-    public void setEntityId(int value) {
-        handle.getIntegers().write(0, value);
-    }
-    
+
     /**
      * Retrieve the velocity in the x axis.
      * @return The current velocity X
@@ -78,7 +80,7 @@ public class WrapperPlayServerEntityVelocity extends AbstractPacket {
     public double getVelocityX() {
         return handle.getIntegers().read(1) / 8000.0D;
     }
-    
+
     /**
      * Set the velocity in the x axis.
      * @param value - new value.
@@ -86,7 +88,7 @@ public class WrapperPlayServerEntityVelocity extends AbstractPacket {
     public void setVelocityX(double value) {
         handle.getIntegers().write(1, (int) (value * 8000.0D));
     }
-    
+
     /**
      * Retrieve the velocity in the y axis.
      * @return The current velocity y
@@ -94,7 +96,7 @@ public class WrapperPlayServerEntityVelocity extends AbstractPacket {
     public double getVelocityY() {
         return handle.getIntegers().read(2) / 8000.0D;
     }
-    
+
     /**
      * Set the velocity in the y axis.
      * @param value - new value.
@@ -102,7 +104,7 @@ public class WrapperPlayServerEntityVelocity extends AbstractPacket {
     public void setVelocityY(double value) {
         handle.getIntegers().write(2, (int) (value * 8000.0D));
     }
-    
+
     /**
      * Retrieve the velocity in the z axis.
      * @return The current velocity z
@@ -110,7 +112,7 @@ public class WrapperPlayServerEntityVelocity extends AbstractPacket {
     public double getVelocityZ() {
         return handle.getIntegers().read(3) / 8000.0D;
     }
-    
+
     /**
      * Set the velocity in the z axis.
      * @param value - new value.

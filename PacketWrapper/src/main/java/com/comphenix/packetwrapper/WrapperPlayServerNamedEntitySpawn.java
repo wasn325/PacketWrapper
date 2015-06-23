@@ -20,10 +20,13 @@ package com.comphenix.packetwrapper;
 
 import java.util.UUID;
 
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 
 public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
@@ -41,7 +44,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     /**
      * Retrieve Entity ID.
      * <p>
-     * Notes: player's Entity ID
+     * Notes: entity's ID
      * @return The current Entity ID
      */
     public int getEntityID() {
@@ -52,8 +55,26 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
      * Set Entity ID.
      * @param value - new value.
      */
-    public void setEntityId(int value) {
+    public void setEntityID(int value) {
         handle.getIntegers().write(0, value);
+    }
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
+     * @param world - the current world of the entity.
+     * @return The spawned entity.
+     */
+    public Entity getEntity(World world) {
+        return handle.getEntityModifier(world).read(0);
+    }
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
+     * @param event - the packet event.
+     * @return The spawned entity.
+     */
+    public Entity getEntity(PacketEvent event) {
+        return getEntity(event.getPlayer().getWorld());
     }
 
     /**
@@ -62,7 +83,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
      * Notes: player's UUID
      * @return The current Player UUID
      */
-    public UUID getPlayerUuid() {
+    public UUID getPlayerUUID() {
         return handle.getSpecificModifier(UUID.class).read(0);
     }
 
@@ -70,7 +91,7 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
      * Set Player UUID.
      * @param value - new value.
      */
-    public void setPlayerUuid(UUID value) {
+    public void setPlayerUUID(UUID value) {
         handle.getSpecificModifier(UUID.class).write(0, value);
     }
 
@@ -213,5 +234,4 @@ public class WrapperPlayServerNamedEntitySpawn extends AbstractPacket {
     public void setMetadata(WrappedDataWatcher value) {
         handle.getDataWatcherModifier().write(0, value);
     }
-
 }

@@ -18,43 +18,64 @@
  */
 package com.comphenix.packetwrapper;
 
+import org.bukkit.World;
 import org.bukkit.WorldType;
+import org.bukkit.entity.Entity;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers.Difficulty;
 import com.comphenix.protocol.wrappers.EnumWrappers.NativeGameMode;
 
 public class WrapperPlayServerLogin extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.LOGIN;
-    
+
     public WrapperPlayServerLogin() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
-    
+
     public WrapperPlayServerLogin(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
+
     /**
      * Retrieve Entity ID.
      * <p>
-     * Notes: the player's Entity ID
+     * Notes: entity's ID
      * @return The current Entity ID
      */
     public int getEntityID() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
      * Set Entity ID.
      * @param value - new value.
      */
-    public void setEntityId(int value) {
+    public void setEntityID(int value) {
         handle.getIntegers().write(0, value);
     }
-    
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
+     * @param world - the current world of the entity.
+     * @return The spawned entity.
+     */
+    public Entity getEntity(World world) {
+        return handle.getEntityModifier(world).read(0);
+    }
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
+     * @param event - the packet event.
+     * @return The spawned entity.
+     */
+    public Entity getEntity(PacketEvent event) {
+        return getEntity(event.getPlayer().getWorld());
+    }
+
     /**
      * Retrieve Gamemode.
      * <p>
@@ -64,7 +85,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public NativeGameMode getGamemode() {
         return handle.getGameModes().read(0);
     }
-    
+
     /**
      * Set Gamemode.
      * @param value - new value.
@@ -72,7 +93,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public void setGamemode(NativeGameMode value) {
         handle.getGameModes().write(0, value);
     }
-    
+
     /**
      * Retrieve Dimension.
      * <p>
@@ -82,7 +103,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public int getDimension() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
      * Set Dimension.
      * @param value - new value.
@@ -90,7 +111,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public void setDimension(int value) {
         handle.getIntegers().write(0, value);
     }
-    
+
     /**
      * Retrieve Difficulty.
      * <p>
@@ -100,7 +121,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public Difficulty getDifficulty() {
         return handle.getDifficulties().read(0);
     }
-    
+
     /**
      * Set Difficulty.
      * @param value - new value.
@@ -108,7 +129,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public void setDifficulty(Difficulty value) {
         handle.getDifficulties().write(0, value);
     }
-    
+
     /**
      * Retrieve Max Players.
      * <p>
@@ -118,7 +139,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public int getMaxPlayers() {
         return handle.getIntegers().read(1);
     }
-    
+
     /**
      * Set Max Players.
      * @param value - new value.
@@ -126,7 +147,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public void setMaxPlayers(int value) {
         handle.getIntegers().write(0, value);
     }
-    
+
     /**
      * Retrieve Level Type.
      * <p>
@@ -136,7 +157,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public WorldType getLevelType() {
         return handle.getWorldTypeModifier().read(0);
     }
-    
+
     /**
      * Set Level Type.
      * @param value - new value.
@@ -144,7 +165,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public void setLevelType(WorldType value) {
         handle.getWorldTypeModifier().write(0, value);
     }
-    
+
     /**
      * Retrieve Reduced Debug Info.
      * @return The current Reduced Debug Info
@@ -152,7 +173,7 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public boolean getReducedDebugInfo() {
         return handle.getBooleans().read(0);
     }
-    
+
     /**
      * Set Reduced Debug Info.
      * @param value - new value.
@@ -160,6 +181,4 @@ public class WrapperPlayServerLogin extends AbstractPacket {
     public void setReducedDebugInfo(boolean value) {
         handle.getBooleans().write(0, value);
     }
-    
 }
-

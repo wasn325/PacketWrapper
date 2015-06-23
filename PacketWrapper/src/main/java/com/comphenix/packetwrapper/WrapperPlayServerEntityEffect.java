@@ -18,8 +18,12 @@
  */
 package com.comphenix.packetwrapper;
 
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 
 public class WrapperPlayServerEntityEffect extends AbstractPacket {
     public static final PacketType TYPE = PacketType.Play.Server.ENTITY_EFFECT;
@@ -42,13 +46,31 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
     public int getEntityID() {
         return handle.getIntegers().read(0);
     }
-    
+
     /**
      * Set Entity ID.
      * @param value - new value.
      */
-    public void setEntityId(int value) {
+    public void setEntityID(int value) {
         handle.getIntegers().write(0, value);
+    }
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
+     * @param world - the current world of the entity.
+     * @return The spawned entity.
+     */
+    public Entity getEntity(World world) {
+        return handle.getEntityModifier(world).read(0);
+    }
+
+    /**
+     * Retrieve the entity of the painting that will be spawned.
+     * @param event - the packet event.
+     * @return The spawned entity.
+     */
+    public Entity getEntity(PacketEvent event) {
+        return getEntity(event.getPlayer().getWorld());
     }
     
     /**
@@ -57,7 +79,7 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
      * Notes: see [[1]]
      * @return The current Effect ID
      */
-    public byte getEffectId() {
+    public byte getEffectID() {
         return handle.getBytes().read(0);
     }
     
@@ -65,8 +87,8 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
      * Set Effect ID.
      * @param value - new value.
      */
-    public void setEffectId(byte value) {
-        handle.getBytes().write(0, value);
+    public void setEffectID(byte value) {
+        handle.getBytes().write(0, (byte) (value & 255));
     }
     
     /**
@@ -82,7 +104,7 @@ public class WrapperPlayServerEntityEffect extends AbstractPacket {
      * @param value - new value.
      */
     public void setAmplifier(byte value) {
-        handle.getBytes().write(1, value);
+        handle.getBytes().write(1, (byte) (value & 255));
     }
     
     /**

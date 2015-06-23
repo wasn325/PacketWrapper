@@ -41,34 +41,36 @@ public class WrapperPlayServerUpdateAttributes extends AbstractPacket {
     }
 
     /**
-     * Retrieve the entity's ID.
+     * Retrieve Entity ID.
+     * <p>
+     * Notes: entity's ID
      * @return The current Entity ID
-    */
-    public int getEntityId() {
+     */
+    public int getEntityID() {
         return handle.getIntegers().read(0);
     }
 
     /**
-     * Set the entity's ID.
+     * Set Entity ID.
      * @param value - new value.
-    */
-    public void setEntityId(int value) {
+     */
+    public void setEntityID(int value) {
         handle.getIntegers().write(0, value);
     }
 
     /**
-     * Retrieve the entity.
+     * Retrieve the entity of the painting that will be spawned.
      * @param world - the current world of the entity.
-     * @return The entity.
+     * @return The spawned entity.
      */
     public Entity getEntity(World world) {
         return handle.getEntityModifier(world).read(0);
     }
 
     /**
-     * Retrieve the entity.
+     * Retrieve the entity of the painting that will be spawned.
      * @param event - the packet event.
-     * @return The entity.
+     * @return The spawned entity.
      */
     public Entity getEntity(PacketEvent event) {
         return getEntity(event.getPlayer().getWorld());
