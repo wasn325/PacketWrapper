@@ -70,21 +70,21 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
     }
 
     /**
-     * Retrieve Objective value.
+     * Retrieve Objective DisplayName.
      * <p>
      * Notes: only if mode is 0 or 2. The text to be displayed for the score.
      * @return The current Objective value
      */
-    public String getValue() {
+    public String getDisplayName() {
         return handle.getStrings().read(1);
     }
     
     /**
-     * Set Objective value.
+     * Set Objective DisplayName.
      * @param value - new value.
      */
-    public void setValue(String value) {
-        handle.getStrings().write(0, value);
+    public void setDisplayName(String value) {
+        handle.getStrings().write(1, value);
     }
 
     /**
