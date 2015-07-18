@@ -5,7 +5,7 @@
   <groupId>com.comphenix.packetwrapper</groupId>
   <artifactId>PacketWrapper</artifactId>
   <packaging>jar</packaging>
-  <version>1.8-R0.1</version>
+  <version>1.8.7-R0.1-SNAPSHOT</version>
   <name>PacketWrapper</name>
 
   <properties>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
       <artifactId>ProtocolLib</artifactId>
-      <version>3.6.4-SNAPSHOT</version>
+      <version>3.6.4</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
