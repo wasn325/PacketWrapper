@@ -78,11 +78,11 @@ public class WrapperPlayClientSteerVehicle extends AbstractPacket {
     }
 
     public boolean isUnmount() {
-    	return handle.getBooleans().read(0);
+    	return handle.getBooleans().read(1);
     }
 
     public void setUnmount(boolean value) {
-    	handle.getBooleans().write(0, value);
+    	handle.getBooleans().write(1, value);
     }
     
 }
