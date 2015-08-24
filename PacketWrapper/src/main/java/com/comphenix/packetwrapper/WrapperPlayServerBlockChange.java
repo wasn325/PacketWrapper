@@ -18,6 +18,9 @@
  */
 package com.comphenix.packetwrapper;
 
+import org.bukkit.Location;
+import org.bukkit.World;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.BlockPosition;
@@ -51,6 +54,15 @@ public class WrapperPlayServerBlockChange extends AbstractPacket {
      */
     public void setLocation(BlockPosition value) {
         handle.getBlockPositionModifier().write(0, value);
+    }
+
+    /**
+     * Retrieve the Bukkit Location.
+     * @param world World for the location
+     * @return Bukkit Location
+     */
+    public Location getBukkitLocation(World world) {
+    	return getLocation().toVector().toLocation(world);
     }
     
     /**
