@@ -25,15 +25,15 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 
-public class WrapperPlayServerEntityMoveLook extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Play.Server.ENTITY_MOVE_LOOK;
+public class WrapperPlayServerRelEntityMoveLook extends AbstractPacket {
+	public static final PacketType TYPE = PacketType.Play.Server.REL_ENTITY_MOVE_LOOK;
 
-    public WrapperPlayServerEntityMoveLook() {
+    public WrapperPlayServerRelEntityMoveLook() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
 
-    public WrapperPlayServerEntityMoveLook(PacketContainer packet) {
+    public WrapperPlayServerRelEntityMoveLook(PacketContainer packet) {
         super(packet, TYPE);
     }
 

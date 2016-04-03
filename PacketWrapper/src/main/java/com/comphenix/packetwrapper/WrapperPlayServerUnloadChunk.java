@@ -21,35 +21,53 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
-public class WrapperStatusServerOutPing extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Status.Server.OUT_PING;
+public class WrapperPlayServerUnloadChunk extends AbstractPacket {
+
+    public static final PacketType TYPE = PacketType.Play.Server.UNLOAD_CHUNK;
     
-    public WrapperStatusServerOutPing() {
+    public WrapperPlayServerUnloadChunk() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
     
-    public WrapperStatusServerOutPing(PacketContainer packet) {
+    public WrapperPlayServerUnloadChunk(PacketContainer packet) {
         super(packet, TYPE);
     }
     
     /**
-     * Retrieve Time.
+     * Retrieve Chunk X.
      * <p>
-     * Notes: should be the same as sent by the client
-     * @return The current Time
+     * Notes: block coordinate divided by 16, rounded down
+     * @return The current Chunk X
      */
-    public long getTime() {
-        return handle.getLongs().read(0);
+    public int getChunkX() {
+        return handle.getIntegers().read(0);
     }
     
     /**
-     * Set Time.
+     * Set Chunk X.
      * @param value - new value.
      */
-    public void setTime(long value) {
-        handle.getLongs().write(0, value);
+    public void setChunkX(int value) {
+        handle.getIntegers().write(0, value);
+    }
+    
+    /**
+     * Retrieve Chunk Z.
+     * <p>
+     * Notes: block coordinate divided by 16, rounded down
+     * @return The current Chunk Z
+     */
+    public int getChunkZ() {
+        return handle.getIntegers().read(1);
+    }
+    
+    /**
+     * Set Chunk Z.
+     * @param value - new value.
+     */
+    public void setChunkZ(int value) {
+        handle.getIntegers().write(1, value);
     }
     
 }
-

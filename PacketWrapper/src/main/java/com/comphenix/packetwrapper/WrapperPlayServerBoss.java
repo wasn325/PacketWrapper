@@ -18,36 +18,41 @@
  */
 package com.comphenix.packetwrapper;
 
+import java.util.UUID;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 
-public class WrapperStatusClientInPing extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Status.Client.IN_PING;
+public class WrapperPlayServerBoss extends AbstractPacket {
+
+    public static final PacketType TYPE = PacketType.Play.Server.BOSS;
     
-    public WrapperStatusClientInPing() {
+    public WrapperPlayServerBoss() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
     
-    public WrapperStatusClientInPing(PacketContainer packet) {
+    public WrapperPlayServerBoss(PacketContainer packet) {
         super(packet, TYPE);
     }
     
     /**
-     * Retrieve Time.
-     * @return The current Time
+     * Retrieve UUID.
+     * <p>
+     * Notes: unique ID for this bar
+     * @return The current UUID
      */
-    public long getTime() {
-        return handle.getLongs().read(0);
+    public UUID getUniqueId() {
+        return handle.getSpecificModifier(UUID.class).read(0);
     }
     
     /**
-     * Set Time.
+     * Set UUID.
      * @param value - new value.
      */
-    public void setTime(long value) {
-        handle.getLongs().write(0, value);
+    public void setUniqueId(UUID value) {
+        handle.getSpecificModifier(UUID.class).write(0, value);
     }
     
+    // TODO This field changes based on the action
 }
-

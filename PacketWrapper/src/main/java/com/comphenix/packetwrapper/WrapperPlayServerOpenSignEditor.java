@@ -18,31 +18,37 @@
  */
 package com.comphenix.packetwrapper;
 
-import java.util.Map;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.WrappedStatistic;
+import com.comphenix.protocol.wrappers.BlockPosition;
 
-public class WrapperPlayServerStatistics extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Play.Server.STATISTICS;
+public class WrapperPlayServerOpenSignEditor extends AbstractPacket {
+
+    public static final PacketType TYPE = PacketType.Play.Server.OPEN_SIGN_EDITOR;
     
-    public WrapperPlayServerStatistics() {
+    public WrapperPlayServerOpenSignEditor() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
     
-    public WrapperPlayServerStatistics(PacketContainer packet) {
+    public WrapperPlayServerOpenSignEditor(PacketContainer packet) {
         super(packet, TYPE);
     }
     
-    @SuppressWarnings("unchecked")
-    public Map<WrappedStatistic, Integer> getStatistics() {
-        return handle.getSpecificModifier(Map.class).read(0);
+    /**
+     * Retrieve Location.
+     * @return The current Location
+     */
+    public BlockPosition getLocation() {
+        return handle.getBlockPositionModifier().read(0);
     }
-
-    public void setStatistics(Map<WrappedStatistic, Integer> value) {
-        handle.getSpecificModifier(Map.class).write(0, value);
+    
+    /**
+     * Set Location.
+     * @param value - new value.
+     */
+    public void setLocation(BlockPosition value) {
+        handle.getBlockPositionModifier().write(0, value);
     }
+    
 }
-

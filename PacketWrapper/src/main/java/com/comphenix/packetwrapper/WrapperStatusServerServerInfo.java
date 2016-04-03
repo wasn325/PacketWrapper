@@ -22,15 +22,15 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.WrappedServerPing;
 
-public class WrapperStatusServerOutServerInfo extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Status.Server.OUT_SERVER_INFO;
+public class WrapperStatusServerServerInfo extends AbstractPacket {
+    public static final PacketType TYPE = PacketType.Status.Server.SERVER_INFO;
     
-    public WrapperStatusServerOutServerInfo() {
+    public WrapperStatusServerServerInfo() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
     
-    public WrapperStatusServerOutServerInfo(PacketContainer packet) {
+    public WrapperStatusServerServerInfo(PacketContainer packet) {
         super(packet, TYPE);
     }
     

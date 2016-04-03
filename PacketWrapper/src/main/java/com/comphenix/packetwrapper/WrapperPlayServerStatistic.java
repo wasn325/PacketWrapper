@@ -18,39 +18,31 @@
  */
 package com.comphenix.packetwrapper;
 
+import java.util.Map;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.BlockPosition;
+import com.comphenix.protocol.wrappers.WrappedStatistic;
 
-public class WrapperPlayServerOpenSignEntity extends AbstractPacket {
-    public static final PacketType TYPE = PacketType.Play.Server.OPEN_SIGN_ENTITY;
+public class WrapperPlayServerStatistic extends AbstractPacket {
+    public static final PacketType TYPE = PacketType.Play.Server.STATISTIC;
     
-    public WrapperPlayServerOpenSignEntity() {
+    public WrapperPlayServerStatistic() {
         super(new PacketContainer(TYPE), TYPE);
         handle.getModifier().writeDefaults();
     }
     
-    public WrapperPlayServerOpenSignEntity(PacketContainer packet) {
+    public WrapperPlayServerStatistic(PacketContainer packet) {
         super(packet, TYPE);
     }
     
-    /**
-     * Retrieve Location.
-     * <p>
-     * Notes: block coordinates
-     * @return The current Location
-     */
-    public BlockPosition getLocation() {
-        return handle.getBlockPositionModifier().read(0);
+    @SuppressWarnings("unchecked")
+    public Map<WrappedStatistic, Integer> getStatistics() {
+        return handle.getSpecificModifier(Map.class).read(0);
     }
-    
-    /**
-     * Set Location.
-     * @param value - new value.
-     */
-    public void setLocation(BlockPosition value) {
-        handle.getBlockPositionModifier().write(0, value);
+
+    public void setStatistics(Map<WrappedStatistic, Integer> value) {
+        handle.getSpecificModifier(Map.class).write(0, value);
     }
-    
 }
 
