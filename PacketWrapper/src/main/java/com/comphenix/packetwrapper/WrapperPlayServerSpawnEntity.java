@@ -18,6 +18,8 @@
  */
 package com.comphenix.packetwrapper;
 
+import java.util.UUID;
+
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
@@ -130,20 +132,12 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
         handle.getIntegers().write(0, value);
     }
 
-    /**
-     * Retrieve the type of object. See {@link ObjectTypes}
-     * @return The current Type
-    */
-    public int getType() {
-        return handle.getIntegers().read(9);
+    public UUID getUniqueId() {
+    	return handle.getSpecificModifier(UUID.class).read(0);
     }
 
-    /**
-     * Set the type of object. See {@link ObjectTypes}.
-     * @param value - new value.
-    */
-    public void setType(int value) {
-        handle.getIntegers().write(9, value);
+    public void setUniqueId(UUID value) {
+    	handle.getSpecificModifier(UUID.class).write(0, value);
     }
 
     /**
@@ -153,7 +147,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current X
     */
     public double getX() {
-        return handle.getIntegers().read(1) / 32.0D;
+        return handle.getDoubles().read(0);
     }
 
     /**
@@ -161,7 +155,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new value.
     */
     public void setX(double value) {
-        handle.getIntegers().write(1, (int) Math.floor(value * 32.0D));
+        handle.getDoubles().write(0, value);
     }
 
     /**
@@ -171,7 +165,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current y
     */
     public double getY() {
-        return handle.getIntegers().read(2) / 32.0D;
+        return handle.getDoubles().read(1);
     }
 
     /**
@@ -179,7 +173,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new value.
     */
     public void setY(double value) {
-        handle.getIntegers().write(2, (int) Math.floor(value * 32.0D));
+    	handle.getDoubles().write(1, value);
     }
 
     /**
@@ -189,7 +183,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current z
     */
     public double getZ() {
-        return handle.getIntegers().read(3) / 32.0D;
+        return handle.getDoubles().read(2);
     }
 
     /**
@@ -197,7 +191,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new value.
     */
     public void setZ(double value) {
-        handle.getIntegers().write(3, (int) Math.floor(value * 32.0D));
+    	handle.getDoubles().write(2, value);
     }
 
     /**
@@ -207,7 +201,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The optional speed x.
     */
     public double getOptionalSpeedX() {
-        return handle.getIntegers().read(4) / 8000.0D;
+        return handle.getIntegers().read(1) / 8000.0D;
     }
 
     /**
@@ -215,7 +209,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new value.
     */
     public void setOptionalSpeedX(double value) {
-        handle.getIntegers().write(4, (int) (value * 8000.0D));
+        handle.getIntegers().write(1, (int) (value * 8000.0D));
     }
 
     /**
@@ -225,7 +219,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The optional speed y.
     */
     public double getOptionalSpeedY() {
-        return handle.getIntegers().read(5) / 8000.0D;
+        return handle.getIntegers().read(2) / 8000.0D;
     }
 
     /**
@@ -233,7 +227,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new value.
     */
     public void setOptionalSpeedY(double value) {
-        handle.getIntegers().write(5, (int) (value * 8000.0D));
+        handle.getIntegers().write(2, (int) (value * 8000.0D));
     }
 
     /**
@@ -243,7 +237,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The optional speed z.
     */
     public double getOptionalSpeedZ() {
-        return handle.getIntegers().read(6) / 8000.0D;
+        return handle.getIntegers().read(3) / 8000.0D;
     }
 
     /**
@@ -251,23 +245,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new value.
     */
     public void setOptionalSpeedZ(double value) {
-        handle.getIntegers().write(6, (int) (value * 8000.0D));
-    }
-
-    /**
-     * Retrieve the yaw.
-     * @return The current Yaw
-    */
-    public float getYaw() {
-        return (handle.getIntegers().read(7) * 360.F) / 256.0F;
-    }
-
-    /**
-     * Set the yaw of the object spawned.
-     * @param value - new yaw.
-    */
-    public void setYaw(float value) {
-        handle.getIntegers().write(7, (int) (value * 256.0F / 360.0F));
+        handle.getIntegers().write(3, (int) (value * 8000.0D));
     }
 
     /**
@@ -275,7 +253,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current pitch.
     */
     public float getPitch() {
-        return (handle.getIntegers().read(8) * 360.F) / 256.0F;
+        return (handle.getIntegers().read(4) * 360.F) / 256.0F;
     }
 
     /**
@@ -283,7 +261,39 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new pitch.
     */
     public void setPitch(float value) {
-        handle.getIntegers().write(8, (int) (value * 256.0F / 360.0F));
+        handle.getIntegers().write(4, (int) (value * 256.0F / 360.0F));
+    }
+
+    /**
+     * Retrieve the yaw.
+     * @return The current Yaw
+    */
+    public float getYaw() {
+        return (handle.getIntegers().read(5) * 360.F) / 256.0F;
+    }
+
+    /**
+     * Set the yaw of the object spawned.
+     * @param value - new yaw.
+    */
+    public void setYaw(float value) {
+        handle.getIntegers().write(5, (int) (value * 256.0F / 360.0F));
+    }
+
+    /**
+     * Retrieve the type of object. See {@link ObjectTypes}
+     * @return The current Type
+    */
+    public int getType() {
+        return handle.getIntegers().read(6);
+    }
+
+    /**
+     * Set the type of object. See {@link ObjectTypes}.
+     * @param value - new value.
+    */
+    public void setType(int value) {
+        handle.getIntegers().write(6, value);
     }
 
     /**
@@ -320,7 +330,7 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @return The current object Data
     */
     public int getObjectData() {
-        return handle.getIntegers().read(10);
+        return handle.getIntegers().read(7);
     }
 
     /**
@@ -330,6 +340,6 @@ public class WrapperPlayServerSpawnEntity extends AbstractPacket {
      * @param value - new object data.
     */
     public void setObjectData(int value) {
-        handle.getIntegers().write(10, value);
+        handle.getIntegers().write(7, value);
     }
 }

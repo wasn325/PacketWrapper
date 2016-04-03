@@ -106,25 +106,7 @@ public class WrapperPlayClientWindowClick extends AbstractPacket {
     public void setActionNumber(short value) {
         handle.getShorts().write(0, value);
     }
-    
-    /**
-     * Retrieve Mode.
-     * <p>
-     * Notes: inventory operation mode. See below.
-     * @return The current Mode
-     */
-    public int getMode() {
-        return handle.getIntegers().read(3);
-    }
-    
-    /**
-     * Set Mode.
-     * @param value - new value.
-     */
-    public void setMode(int value) {
-        handle.getIntegers().write(3,  value);
-    }
-    
+
     /**
      * Retrieve Clicked item.
      * @return The current Clicked item
@@ -140,6 +122,6 @@ public class WrapperPlayClientWindowClick extends AbstractPacket {
     public void setClickedItem(ItemStack value) {
         handle.getItemModifier().write(0, value);
     }
-    
-}
 
+    // TODO InventoryClickType -> shift
+}
