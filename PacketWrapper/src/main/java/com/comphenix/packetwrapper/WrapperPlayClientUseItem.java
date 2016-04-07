@@ -20,7 +20,10 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.utility.MinecraftReflection;
 import com.comphenix.protocol.wrappers.BlockPosition;
+import com.comphenix.protocol.wrappers.EnumWrappers.EnumConverter;
+import com.comphenix.protocol.wrappers.EnumWrappers.Hand;
 
 public class WrapperPlayClientUseItem extends AbstractPacket {
 
@@ -52,10 +55,24 @@ public class WrapperPlayClientUseItem extends AbstractPacket {
     public void setLocation(BlockPosition value) {
         handle.getBlockPositionModifier().write(0, value);
     }
-    
-    // TODO EnumDirection -> face
-    
-    // TODO EnumHand -> hand
+
+    public Direction getFace() {
+    	return handle.getModifier().<Direction>withType(
+    			MinecraftReflection.getMinecraftClass("EnumDirection"), new EnumConverter<Direction>(Direction.class)).read(0);
+    }
+
+    public void setFace(Direction value) {
+    	handle.getModifier().<Direction>withType(
+    			MinecraftReflection.getMinecraftClass("EnumDirection"), new EnumConverter<Direction>(Direction.class)).write(0, value);
+    }
+
+    public Hand getHand() {
+    	return handle.getHands().read(0);
+    }
+
+    public void setHand(Hand value) {
+    	handle.getHands().write(0, value);
+    }
     
     /**
      * Retrieve Cursor Position X.
@@ -110,5 +127,13 @@ public class WrapperPlayClientUseItem extends AbstractPacket {
     public void setCursorPositionZ(float value) {
         handle.getFloat().write(2, value);
     }
-    
+
+    public static enum Direction {
+    	DOWN,
+    	UP,
+    	NORTH,
+    	SOUTH,
+    	WEST,
+    	EAST;
+    }
 }

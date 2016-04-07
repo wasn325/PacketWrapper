@@ -18,6 +18,8 @@
  */
 package com.comphenix.packetwrapper;
 
+import org.bukkit.Sound;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers.SoundCategory;
@@ -34,7 +36,13 @@ public class WrapperPlayServerNamedSoundEffect extends AbstractPacket {
         super(packet, TYPE);
     }
     
-    // TODO SoundEffect -> SoundEffect
+    public Sound getSoundEffect() {
+    	return handle.getSoundEffects().read(0);
+    }
+
+    public void setSoundEffect(Sound value) {
+    	handle.getSoundEffects().write(0, value);
+    }
 
     public SoundCategory getSoundCategory() {
     	return handle.getSoundCategories().read(0);

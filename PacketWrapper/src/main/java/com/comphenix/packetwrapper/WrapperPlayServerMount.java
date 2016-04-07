@@ -18,10 +18,15 @@
  */
 package com.comphenix.packetwrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 
@@ -82,5 +87,31 @@ public class WrapperPlayServerMount extends AbstractPacket {
         handle.getIntegerArrays().write(0, value);
     }
 
-    // TODO Convert the arrays?
+    public List<Entity> getPassengers(PacketEvent event) {
+    	return getPassengers(event.getPlayer().getWorld());
+    }
+
+    public List<Entity> getPassengers(World world) {
+    	int[] ids = getPassengerIds();
+    	List<Entity> passengers = new ArrayList<>();
+    	ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+
+    	for (int id : ids) {
+    		Entity entity = manager.getEntityFromID(world, id);
+    		if (entity != null) {
+    			passengers.add(entity);
+    		}
+    	}
+
+    	return passengers;
+    }
+
+    public void setPassengers(List<Entity> value) {
+    	int[] array = new int[value.size()];
+    	for (int i = 0; i < value.size(); i++) {
+    		array[i] = value.get(i).getEntityId();
+    	}
+
+    	setPassengerIds(array);
+    }
 }

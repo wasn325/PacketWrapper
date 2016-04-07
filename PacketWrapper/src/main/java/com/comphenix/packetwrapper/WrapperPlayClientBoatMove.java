@@ -34,21 +34,19 @@ public class WrapperPlayClientBoatMove extends AbstractPacket {
         super(packet, TYPE);
     }
 
-    // TODO Figure out what these fields mean
-    
-    public boolean getFlag() {
+    public boolean getLeftOar() {
         return handle.getBooleans().read(0);
     }
 
-    public void setFlag(boolean value) {
+    public void setLeftOar(boolean value) {
         handle.getBooleans().write(0, value);
     }
 
-    public boolean getFlag1() {
+    public boolean getRightOar() {
         return handle.getBooleans().read(1);
     }
 
-    public void setFlag1(boolean value) {
+    public void setRightOar(boolean value) {
         handle.getBooleans().write(1, value);
     }
     
