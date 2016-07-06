@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.comphenix.packetwrapper</groupId>
   <artifactId>PacketWrapper</artifactId>
-  <packaging>jar</packaging>
   <version>1.10-R0.1-SNAPSHOT</version>
+
   <name>PacketWrapper</name>
 
   <inceptionYear>2012</inceptionYear>
@@ -41,20 +41,25 @@
   </distributionManagement>
 
   <dependencies>
+    <!-- Should be already included as transitive dependency of spigot
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
       <version>1.10.2-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
+    -->
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot</artifactId>
       <version>1.10.2-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
       <artifactId>ProtocolLib-API</artifactId>
       <version>4.0-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
