@@ -20,6 +20,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.utility.MinecraftReflection;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -83,7 +84,12 @@ public class WrapperPlayClientCustomPayload extends AbstractPacket {
 	 * @param content - new payload content
 	 */
 	public void setContentsBuffer(ByteBuf contents) {
-		handle.getModifier().withType(ByteBuf.class).write(0, contents);
+		if (MinecraftReflection.is(MinecraftReflection.getPacketDataSerializerClass(), contents)) {
+			handle.getModifier().withType(ByteBuf.class).write(0, contents);
+		} else {
+			Object serializer = MinecraftReflection.getPacketDataSerializer(contents);
+			handle.getModifier().withType(ByteBuf.class).write(0, serializer);
+		}
 	}
 
 	/**
