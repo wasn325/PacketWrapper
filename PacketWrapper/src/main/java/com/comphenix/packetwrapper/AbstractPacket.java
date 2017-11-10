@@ -101,7 +101,7 @@ public abstract class AbstractPacket {
 			ProtocolLibrary.getProtocolManager().recieveClientPacket(sender,
 					getHandle());
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot recieve packet.", e);
+			throw new RuntimeException("Cannot receive packet.", e);
 		}
 	}
 }

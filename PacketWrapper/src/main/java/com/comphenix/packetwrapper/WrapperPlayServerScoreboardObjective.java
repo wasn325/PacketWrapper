@@ -97,7 +97,7 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
 	 * <p>
 	 * Notes: Can be either INTEGER or HEARTS
 	 * 
-	 * @return
+	 * @return the current health display value
 	 */
 	public HealthDisplay getHealthDisplay() {
 		return handle.getEnumModifier(HealthDisplay.class, 2).read(0);
