@@ -77,7 +77,7 @@ public abstract class AbstractPacket {
 	 * 
 	 * @param sender - the sender.
 	 * @throws RuntimeException If the packet cannot be received.
-	 * @deprecated Misspelled. recieve -> receive
+	 * @deprecated Misspelled. recieve to receive
 	 * @see #receivePacket(Player)
 	 */
 	@Deprecated
