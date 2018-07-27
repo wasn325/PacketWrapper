@@ -21,6 +21,7 @@ package com.comphenix.packetwrapper;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.reflect.IntEnum;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 
 public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
 	public static final PacketType TYPE =
@@ -79,8 +80,8 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
 	 * 
 	 * @return The current Objective value
 	 */
-	public String getDisplayName() {
-		return handle.getStrings().read(1);
+	public WrappedChatComponent getDisplayName() {
+		return handle.getChatComponents().read(0);
 	}
 
 	/**
@@ -88,8 +89,8 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
 	 * 
 	 * @param value - new value.
 	 */
-	public void setDisplayName(String value) {
-		handle.getStrings().write(1, value);
+	public void setDisplayName(WrappedChatComponent value) {
+		handle.getChatComponents().write(0, value);
 	}
 
 	/**
@@ -134,7 +135,7 @@ public class WrapperPlayServerScoreboardObjective extends AbstractPacket {
 		handle.getIntegers().write(0, value);
 	}
 
-	public static enum HealthDisplay {
-		INTEGER, HEARTS;
+	public enum HealthDisplay {
+		INTEGER, HEARTS
 	}
 }
