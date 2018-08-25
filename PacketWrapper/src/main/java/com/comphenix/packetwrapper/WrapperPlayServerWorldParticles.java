@@ -20,7 +20,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers.Particle;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 
 public class WrapperPlayServerWorldParticles extends AbstractPacket {
 	public static final PacketType TYPE =
@@ -36,21 +36,21 @@ public class WrapperPlayServerWorldParticles extends AbstractPacket {
 	}
 
 	/**
-	 * Retrieve Particle type.
+	 * Retrieve the particle.
 	 * 
-	 * @return The current Particle type
+	 * @return The current particle
 	 */
-	public Particle getParticleType() {
-		return handle.getParticles().read(0);
+	public WrappedParticle getParticle() {
+		return handle.getNewParticles().read(0);
 	}
 
 	/**
-	 * Set Particle type.
+	 * Set the particle.
 	 * 
 	 * @param value - new value.
 	 */
-	public void setParticleType(Particle value) {
-		handle.getParticles().write(0, value);
+	public void setParticleType(WrappedParticle value) {
+		handle.getNewParticles().write(0, value);
 	}
 
 	/**

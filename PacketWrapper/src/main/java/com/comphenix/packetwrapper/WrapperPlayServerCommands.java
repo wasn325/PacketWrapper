@@ -20,6 +20,7 @@ package com.comphenix.packetwrapper;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import com.mojang.brigadier.tree.RootCommandNode;
 
 public class WrapperPlayServerCommands extends AbstractPacket {
 
@@ -33,8 +34,16 @@ public class WrapperPlayServerCommands extends AbstractPacket {
     public WrapperPlayServerCommands(PacketContainer packet) {
         super(packet, TYPE);
     }
-    
-    // Cannot find type for a
-    // Cannot find type for a
-    // Cannot find type for a
+
+    /**
+     * Mojang's brigadier library isn't versioned inside craftbukkit,
+     * so it should be safe to use here.
+     */
+    public RootCommandNode getRoot() {
+        return (RootCommandNode) handle.getModifier().read(0);
+    }
+
+    public void setRoot(RootCommandNode node) {
+        handle.getModifier().write(0, node);
+    }
 }
